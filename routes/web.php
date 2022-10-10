@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAge;
@@ -26,9 +27,11 @@ Route::get('/getForm', function () {
 
 Route::post('postLogin', [MyController::class, "postForm"])->name("postForm");
 
-
-
-
+Route::group(['prefix'=>'/admin'],function(){
+    Route::get('/',[AdminController::class, "index"])->name('admin');
+    Route::get('/create',[AdminController::class, "getCreate"])->name('admin.create');
+    Route::post('/create',[AdminController::class, "postCreate"]);
+});
 
 Route::get('/admin/user/show', function () {
     return view('admin.user.show');
@@ -40,7 +43,9 @@ Route::get('/admin/user/create', function () {
 });
 Route::post('/admin/user/create', [UserController::class, "create"])->name("userCreate");
 
-
+// Route::get('qb/get',function(){
+//     $email = DB::table('admin') -> where('aEmail', 'anhbg330011@gmail.com') -> first();
+// });
 
 
 
