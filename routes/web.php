@@ -19,18 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MyController::class, "index"]);
 
-Route::get('/demo', [MyController::class, "demo"]);
 
-Route::get('/getForm', function () {
-    return view('postForm');
-});
 
-Route::post('postLogin', [MyController::class, "postForm"])->name("postForm");
-
-Route::group(['prefix'=>'/admin'],function(){
-    Route::get('/',[AdminController::class, "index"])->name('admin');
-    Route::get('/create',[AdminController::class, "getCreate"])->name('admin.create');
+Route::group(['prefix'=>'/admin/admin'],function(){
+    Route::get('/',[AdminController::class, "index"])->name('admin.admin.index');
+    Route::get('/create',[AdminController::class, "getCreate"])->name('admin.admin.create');
     Route::post('/create',[AdminController::class, "postCreate"]);
+    Route::get('/edit/{id}',[AdminController::class, "getEdit"])->name('admin.admin.edit');
+    Route::post('/edit/{id}',[AdminController::class, "postEdit"]);
+    Route::get('/delete/{id}',[AdminController::class, "destroy"]);
 });
 
 Route::get('/admin/user/show', function () {
@@ -42,6 +39,14 @@ Route::get('/admin/user/create', function () {
     return view('admin.user.create');
 });
 Route::post('/admin/user/create', [UserController::class, "create"])->name("userCreate");
+
+// Route::get('/demo', [MyController::class, "demo"]);
+
+// Route::get('/getForm', function () {
+//     return view('postForm');
+// });
+
+// Route::post('postLogin', [MyController::class, "postForm"])->name("postForm");
 
 // Route::get('qb/get',function(){
 //     $email = DB::table('admin') -> where('aEmail', 'anhbg330011@gmail.com') -> first();

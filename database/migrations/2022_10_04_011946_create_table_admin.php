@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('aFullname');
             $table->string('aPassword');
             $table->string('aEmail');
-            $table->integer('aPhoneNumber');
-            $table->binary('aGender');
+            $table->string('aPhoneNumber');
+            $table->boolean('aGender');
+            $table->timestamps();
         });
     }
 
