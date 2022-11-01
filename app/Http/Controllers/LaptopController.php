@@ -3,21 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Admin;
+use App\Models\Laptop;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class AdminController extends Controller
+
+class LaptopController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this ->laptop = new Laptop();
+    }
+
     public function index()
     {
-        $admin = Admin::all();
-        return view('admin.admin.index', compact('admin'));
+        $laptop = $this -> laptop -> showAllLaptop();
+        return view('admin.laptop.index', compact('laptop'));
     }
 
     /**
@@ -27,7 +34,16 @@ class AdminController extends Controller
      */
     public function getCreate()
     {
-        return view('admin.admin.create');
+        $brand = $this -> laptop -> getBrand();
+        $screensize = $this -> laptop -> getScreensize();
+        $processor = $this -> laptop -> getProcessor();
+        $vga = $this -> laptop -> getVGA();
+        $ram = $this -> laptop -> getRAM();
+        $color = $this -> laptop -> getColor();
+        $ssd = $this -> laptop -> getSSD();
+        $hdd = $this -> laptop -> getHDD();
+        $provider = $this -> laptop -> getProvider();
+        return view('admin.laptop.create', compact('brand','screensize', 'processor', 'vga', 'ram', 'color', 'ssd', 'hdd', 'provider'));
     }
 
     /**
@@ -38,8 +54,8 @@ class AdminController extends Controller
      */
     public function getEdit($id)
     {
-        $data['admin'] = Admin::find($id);
-        return view('admin.admin.edit', $data);
+        $data['laptop'] = Laptop::find($id);
+        return view('admin.laptop.edit', $data);
     }
 
     /**
@@ -65,13 +81,13 @@ class AdminController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        $admin = new Admin;
-        $admin->aFullname = $request->fullname;
-        $admin->aEmail = $request->email;
-        $admin->aPassword = Hash::make($request->password);
-        $admin->aPhoneNumber = $request->phone_number;
-        $admin->aGender = $request->gender;
-        $admin->save();
+        // $admin = new Admin;
+        // $admin->aFullname = $request->fullname;
+        // $admin->aEmail = $request->email;
+        // $admin->aPassword = Hash::make($request->password);
+        // $admin->aPhoneNumber = $request->phone_number;
+        // $admin->aGender = $request->gender;
+        // $admin->save();
 
         return redirect()->route('admin.admin.index');
     }
@@ -97,13 +113,13 @@ class AdminController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        $admin = Admin::find($id);
-        $admin->aFullname = $request->fullname;
-        $admin->aEmail = $request->email;
-        if ($request->password == null or $request->password == "") $admin->aPassword = Hash::make($request->password);
-        $admin->aPhoneNumber = $request->phone_number;
-        $admin->aGender = $request->gender;
-        $admin->save();
+        // $admin = Admin::find($id);
+        // $admin->aFullname = $request->fullname;
+        // $admin->aEmail = $request->email;
+        // if ($request->password == null or $request->password == "") $admin->aPassword = Hash::make($request->password);
+        // $admin->aPhoneNumber = $request->phone_number;
+        // $admin->aGender = $request->gender;
+        // $admin->save();
 
         return redirect()->route('admin.admin.index');
     }
@@ -128,8 +144,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $admin = Admin::find($id);
-        $admin->delete();
-        return back();
+        // $admin = Admin::find($id);
+        // $admin->delete();
+        // return back();
     }
 }

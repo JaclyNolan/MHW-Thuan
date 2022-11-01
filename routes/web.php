@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAge;
@@ -19,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MyController::class, "index"]);
 
-
+Route::get('/blank', function(){
+    return(view('admin.layout.index'));
+});
 
 Route::group(['prefix'=>'/admin/admin'],function(){
     Route::get('/',[AdminController::class, "index"])->name('admin.admin.index');
@@ -28,6 +31,15 @@ Route::group(['prefix'=>'/admin/admin'],function(){
     Route::get('/edit/{id}',[AdminController::class, "getEdit"])->name('admin.admin.edit');
     Route::post('/edit/{id}',[AdminController::class, "postEdit"]);
     Route::get('/delete/{id}',[AdminController::class, "destroy"]);
+});
+
+Route::group(['prefix'=>'/admin/laptop'],function(){
+    Route::get('/',[LaptopController::class, "index"])->name('admin.laptop.index');
+    Route::get('/create',[LaptopController::class, "getCreate"])->name('admin.laptop.create');
+    Route::post('/create',[LaptopController::class, "postCreate"]);
+    Route::get('/edit/{id}',[LaptopController::class, "getEdit"])->name('admin.laptop.edit');
+    Route::post('/edit/{id}',[LaptopController::class, "postEdit"]);
+    Route::get('/delete/{id}',[LaptopController::class, "destroy"]);
 });
 
 Route::get('/admin/user/show', function () {
