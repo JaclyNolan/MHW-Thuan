@@ -1,5 +1,7 @@
 @extends('admin.layout.index')
 
+@php dump($laptop_specs) @endphp
+
 @section('content')
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Laptop</h6>
@@ -29,52 +31,34 @@
                     <div class="mb-3">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description" placeholder="Nice laptop, yep." id="description" rows="3"
-                            value="{{ old('description') }}"></textarea>
+                            >{{ old('description') }}</textarea>
                     </div>
-                    <div class="mb-3">
-                        <label class="my-1 mr-2">Brand</label>
-                        <select class="custom-select my-1 mr-sm-2" name="brand">
-                            <option selected value="None">Choose...</option>
-                            @if (!empty($brand))
-                                @foreach ($brand as $item)
-                                    <option value="{{ $item->bID }}" {{old('brand') == $item->bID?'select':true}} >{{$item->bName}}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="my-1 mr-2">Screen Size</label>
-                        <select class="custom-select my-1 mr-sm-2" name="brand">
-                            <option selected value="None">Choose...</option>
-                            @if (!empty($screensize))
-                                @foreach ($screensize as $item)
-                                    <option value="{{ $item->sID }}" {{old('screensize') == $item->sID?'select':true}} >{{$item->sSize}}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Phone Number</label>
-                        <input class="form-control" name="phone_number" placeholder="0987654321"
-                            value="{{ old('phone_number') }}" type="number">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Gender</label>
-                        <div class="form-control">
-                            <input class="form-check-input" id="male" name="gender" type="radio" <?php if (old('gender') == 0 and old('gender') != null) {
-                                echo 'checked';
-                            } ?>
-                                value=0>
-                            <label class="form-check-label" for="male">Male</label>
+                    @foreach ($laptop_specs as $laptop_spec_name => $laptop_spec_array)
+                        <div class="mb-3">
+                            <label class="my-1 mr-2">{{ ucfirst($laptop_spec_name) }}</label>
+                            <select class="custom-select my-1 mr-sm-2" name="{{ $laptop_spec_name }}">
+                                <option selected value=>Choose...</option>
+                                @if (!empty($laptop_spec_array))
+                                    @foreach ($laptop_spec_array as $value)
+                                        <option value="{{ $value->id }}"
+                                            {{ old('laptop_spec_name') == $value->id ? 'selected' : false }}>
+                                            @php $bool = true @endphp
+                                            @foreach ($value as $column_name => $column_value)
+                                                @if ($bool)
+                                                    @if ($column_name != 'id')
+                                                        @php $bool = false @endphp
+                                                        {{ $column_value }}
+                                                    @endif
+                                                @else
+                                                    {{ '| ' . $column_value }}
+                                                @endif
+                                            @endforeach
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
-                        <div class="form-control">
-                            <input class="form-check-input" id="female" name="gender" type="radio" <?php if (old('gender') == 1) {
-                                echo 'checked';
-                            } ?>
-                                value=1>
-                            <label class="form-check-label" for="female">Female</label>
-                        </div>
-                    </div>
+                    @endforeach
                 </fieldset>
                 <button type="submit" class="btn btn-success">Submit</button>
                 <button type="reset" class="btn btn-primary">Reset</button>

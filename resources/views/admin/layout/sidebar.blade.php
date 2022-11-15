@@ -47,18 +47,42 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLaptop"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
             <span>Laptop</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseLaptop" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action:</h6>
                 <a class="collapse-item" href="admin/laptop">List</a>
                 <a class="collapse-item" href="admin/laptop/create">Create</a>
                 <a class="collapse-item" href="admin/laptop">Edit</a>
                 <a class="collapse-item" href="admin/laptop">Delete</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSimple"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Others</span>
+        </a>
+        <div id="collapseSimple" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Action:</h6>
+                <a class="collapse-item" href="admin/simple/brand">Brand</a>
+                <a class="collapse-item" href="admin/simple/color">Color</a>
+                <a class="collapse-item" href="admin/simple/processor">Processor</a>
+                <a class="collapse-item" href="admin/simple/screensize">Screensize</a>
+                <a class="collapse-item" href="admin/simple/vga">VGA</a>
+                <a class="collapse-item" href="admin/simple/ram">RAM</a>
+                <a class="collapse-item" href="admin/simple/hdd">HDD</a>
+                <a class="collapse-item" href="admin/simple/ssd">SSD</a>
+                <a class="collapse-item" href="admin/simple/provider">Provider</a>
+
             </div>
         </div>
     </li>

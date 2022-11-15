@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Admin</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Laptop</h6>
     </div>
     <div class="card-body">
         <?php
@@ -19,48 +19,46 @@
                 @csrf
                 <fieldset class="form-group">
                     <div class="mb-3">
-                        <label class="form-label">Fullname</label>
-                        <input class="form-control" name="fullname" placeholder="Nguyễn Văn A"
-                            value="{{ $admin->aFullname }}">
+                        <label class="form-label">Name</label>
+                        <input class="form-control" name="name" placeholder="Vostro 3400" value="{{ $laptop_info->name }}">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input class="form-control" name="email" placeholder="example@email.com"
-                            value="{{ $admin->aEmail }}" type="email">
+                        <label class="form-label">Price</label>
+                        <input class="form-control" name="price" placeholder="18000000" value="{{ $laptop_info->price }}">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">New Password</label>
-                        <input class="form-control" name="new_password" placeholder="Leave blank to not change" type="password">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" placeholder="Nice laptop, yep." id="description" rows="3"
+                            >{{ $laptop_info->description }}</textarea>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Confirm Password</label>
-                        <input class="form-control" name="new_password_confirmation" placeholder="Leave blank to not change"
-                            type="password">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Phone Number</label>
-                        <input class="form-control" name="phone_number" placeholder="0987654321"
-                            value="{{ $admin->aPhoneNumber }}" type="number">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Gender</label>
-                        <div class="form-control">
-                            <input class="form-check-input" id="male" name="gender" type="radio"
-                                <?php if ($admin->aGender == 0) {
-                                    echo 'checked';
-                                } ?> value=0>
-                            <label class="form-check-label" for="male">Male</label>
+                    @foreach ($laptop_specs as $laptop_spec_name => $laptop_spec_array)
+                        <div class="mb-3">
+                            <label class="my-1 mr-2">{{ ucfirst($laptop_spec_name) }}</label>
+                            <select class="custom-select my-1 mr-sm-2" name="{{ $laptop_spec_name }}">
+                                <option selected value=>Choose...</option>
+                                @if (!empty($laptop_spec_array))
+                                    @foreach ($laptop_spec_array as $value)
+                                        <option value="{{ $value->id }}"
+                                            {{ $laptop_info[$laptop_spec_name . 'ID'] == $value->id ? 'selected' : false }}>
+                                            @php $bool = true @endphp
+                                            @foreach ($value as $column_name => $column_value)
+                                                @if ($bool)
+                                                    @if ($column_name != 'id')
+                                                        @php $bool = false @endphp
+                                                        {{ $column_value }}
+                                                    @endif
+                                                @else
+                                                    {{ '| ' . $column_value }}
+                                                @endif
+                                            @endforeach
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
-                        <div class="form-control">
-                            <input class="form-check-input" id="female" name="gender" type="radio"
-                                <?php if ($admin->aGender == 1) {
-                                    echo 'checked';
-                                } ?> value=1>
-                            <label class="form-check-label" for="female">Female</label>
-                        </div>
-                    </div>
+                    @endforeach
                 </fieldset>
-                <button type="submit" class="btn btn-success">Edit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
                 <button type="reset" class="btn btn-primary">Reset</button>
             </form>
         </div>

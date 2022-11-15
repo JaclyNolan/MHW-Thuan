@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Color extends Model
 {
     use HasFactory;
-    public $table = 'brand';
+    public $table = 'color';
     public $primaryKey = 'id';
     public $timestamps = false;
     /**
@@ -17,14 +17,17 @@ class Brand extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
+        'hex_value'
     ];
 
-    public function laptop() {
-        return $this->hasMany(Laptop::class, 'brand_id');
+    public function laptop()
+    {
+        return $this->hasMany(Laptop::class, 'color_id');
     }
 
-    public function getTableColumns() {
+    public function getTableColumns()
+    {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
 
@@ -33,16 +36,12 @@ class Brand extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-
-    ];
+    protected $hidden = [];
 
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    protected $casts = [
-
-    ];
+    protected $casts = [];
 }

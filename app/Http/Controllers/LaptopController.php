@@ -34,16 +34,8 @@ class LaptopController extends Controller
      */
     public function getCreate()
     {
-        $brand = $this -> laptop -> getBrand();
-        $screensize = $this -> laptop -> getScreensize();
-        $processor = $this -> laptop -> getProcessor();
-        $vga = $this -> laptop -> getVGA();
-        $ram = $this -> laptop -> getRAM();
-        $color = $this -> laptop -> getColor();
-        $ssd = $this -> laptop -> getSSD();
-        $hdd = $this -> laptop -> getHDD();
-        $provider = $this -> laptop -> getProvider();
-        return view('admin.laptop.create', compact('brand','screensize', 'processor', 'vga', 'ram', 'color', 'ssd', 'hdd', 'provider'));
+        $laptop_specs = $this -> laptop -> getLaptopSpec();
+        return view('admin.laptop.create', compact('laptop_specs'));
     }
 
     /**
@@ -54,8 +46,9 @@ class LaptopController extends Controller
      */
     public function getEdit($id)
     {
-        $data['laptop'] = Laptop::find($id);
-        return view('admin.laptop.edit', $data);
+        $laptop_specs = $this -> laptop -> getLaptopSpec();
+        $laptop_info = Laptop::find($id); //all of ids from laptop found using $id
+        return view('admin.laptop.edit', compact('laptop_specs', 'laptop_info'));
     }
 
     /**
@@ -68,11 +61,10 @@ class LaptopController extends Controller
     public function postCreate(Request $request)
     {
         $rules = array(
-            "fullname" => 'required',
-            "email" => 'required|email',
-            "password" => 'required|confirmed|min:6',
-            "phone_number" => 'required|min:8|max:11',
-            "gender" => 'required'
+            "name" => 'required',
+            "price" => 'required|numeric',
+            "description" => 'required',
+            "*" => 'required'
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -81,15 +73,17 @@ class LaptopController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        // $admin = new Admin;
-        // $admin->aFullname = $request->fullname;
-        // $admin->aEmail = $request->email;
-        // $admin->aPassword = Hash::make($request->password);
-        // $admin->aPhoneNumber = $request->phone_number;
-        // $admin->aGender = $request->gender;
-        // $admin->save();
+        $laptop = new Laptop;
+        $laptop->name = $request->name;
+        $laptop->price = $request->price;
+        $laptop->description = $request->description;
+        foreach ($request->except('_token','name','price','description') as $laptop_spec_name => $laptop_spec_id) {
+            $laptop[$laptop_spec_name . "ID"] = $laptop_spec_id;
+        }
+        $laptop->timestamps = false;
+        $laptop->save();
 
-        return redirect()->route('admin.admin.index');
+        return redirect()->route('admin.laptop.index');
     }
     /**
      * Show the form for editing the specified resource.
@@ -100,11 +94,10 @@ class LaptopController extends Controller
     public function postEdit(Request $request, $id)
     {
         $rules = array(
-            "fullname" => 'required',
-            "email" => 'required|email',
-            "password" => 'confirmed|min:6',
-            "phone_number" => 'required|min:8|max:11',
-            "gender" => 'required'
+            "name" => 'required',
+            "price" => 'required|numeric',
+            "description" => 'required',
+            "*" => 'required'
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -113,15 +106,17 @@ class LaptopController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        // $admin = Admin::find($id);
-        // $admin->aFullname = $request->fullname;
-        // $admin->aEmail = $request->email;
-        // if ($request->password == null or $request->password == "") $admin->aPassword = Hash::make($request->password);
-        // $admin->aPhoneNumber = $request->phone_number;
-        // $admin->aGender = $request->gender;
-        // $admin->save();
+        $laptop = Laptop::find($id);
+        $laptop->name = $request->name;
+        $laptop->price = $request->price;
+        $laptop->description = $request->description;
+        foreach ($request->except('_token','name','price','description') as $laptop_spec_name => $laptop_spec_id) {
+            $laptop[$laptop_spec_name . "ID"] = $laptop_spec_id;
+        }
+        $laptop->timestamps = false;
+        $laptop->save();
 
-        return redirect()->route('admin.admin.index');
+        return redirect()->route('admin.laptop.index');
     }
 
     /**
@@ -144,8 +139,8 @@ class LaptopController extends Controller
      */
     public function destroy($id)
     {
-        // $admin = Admin::find($id);
-        // $admin->delete();
-        // return back();
+        $laptop = Laptop::find($id);
+        $laptop->delete();
+        return back();
     }
 }

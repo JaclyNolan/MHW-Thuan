@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,15 @@ Route::group(['prefix'=>'/admin/laptop'],function(){
     Route::get('/edit/{id}',[LaptopController::class, "getEdit"])->name('admin.laptop.edit');
     Route::post('/edit/{id}',[LaptopController::class, "postEdit"]);
     Route::get('/delete/{id}',[LaptopController::class, "destroy"]);
+});
+
+Route::group(['prefix'=>'/admin/simple'],function(){
+    Route::get('/{table_name}',[SimpleController::class, "index"])->name('admin.simple.index');
+    Route::get('/create/{table_name}',[SimpleController::class, "create"])->name('admin.simple.create');
+    Route::post('/create/{table_name}',[SimpleController::class, "store"]);
+    Route::get('/edit/{table_name}/{id}',[SimpleController::class, "edit"])->name('admin.simple.edit');
+    Route::post('/edit/{table_name}/{id}',[SimpleController::class, "update"]);
+    Route::get('/delete/{table_name}/{id}',[SimpleController::class, "destroy"]);
 });
 
 Route::get('/admin/user/show', function () {

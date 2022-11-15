@@ -1,12 +1,11 @@
 @extends('admin.layout.index')
 
-@php dump($laptop); @endphp
-
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary float-left">Laptop</h6>
-            <a href="{{ asset('admin/laptop/create/') }}" type="button" class="btn btn-primary float-right">Create</a>
+            <h6 class="m-0 font-weight-bold text-primary float-left">{{ ucfirst($table_name) }}</h6>
+            <a href="{{ asset('admin/simple/create/' . $table_name) }}" type="button"
+                class="btn btn-primary float-right">Create</a>
         </div>
         <div class="col-md-12 bg-light text-right">
         </div>
@@ -16,8 +15,11 @@
                     <thead>
                         <tr>
                             <th style="width: 50px">STT</th>
-                            <th>ID</th>
-                            <th>Name</th>
+                            @foreach ($array[0] as $column_name => $column_value)
+                                @php $column_name_tmp = str_replace("_", " ", $column_name) @endphp
+                                <th>{{ ucfirst($column_name_tmp) }}</th>
+                            @endforeach
+                            {{-- <th>Name</th>
                             <th>Price</th>
                             <th>Brand</th>
                             <th>Screen</th>
@@ -27,30 +29,21 @@
                             <th>Color</th>
                             <th>SSD</th>
                             <th>HDD</th>
-                            <th>Provider</th>
+                            <th>Provider</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($laptop as $key => $value)
+                        @foreach ($array as $index => $collection)
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $value->laptopID }}</td>
-                                <td>{{ $value->laptopName }}</td>
-                                <td>{{ $value->laptopPrice }}</td>
-                                <td>{{ $value->brandName }}</td>
-                                <td>{{ $value->screenSize }}</td>
-                                <td>{{ $value->processorName }}</td>
-                                <td>{{ $value->vgaName }}</td>
-                                <td>{{ $value->ramSize }}</td>
-                                <td>{{ $value->colorName }}</td>
-                                <td>{{ $value->ssdSize }}</td>
-                                <td>{{ $value->hddSize }}</td>
-                                <td>{{ $value->providerName }}</td>
+                                <td>{{ $index + 1 }}</td>
+                                @foreach ($collection as $column_value)
+                                    <td>{{ $column_value }}</td>
+                                @endforeach
                                 <td style="width: 160px">
-                                    <a href="{{ asset('admin/laptop/edit/' . $value->laptopID) }}"
+                                    <a href="{{ asset('admin/simple/edit/' . $table_name . '/' . $collection['id']) }}"
                                         class="btn btn-primary edit"><span class="glyphicon glyphicon-edit"> </span>
                                         Edit</a>
-                                    <a href="{{ asset('admin/laptop/delete/' . $value->laptopID) }}"
+                                    <a href="{{ asset('admin/simple/delete/' . $table_name . '/' . $collection['id']) }}"
                                         onclick="return confirm('Bạn có chắc muốn xóa?')" class="btn btn-danger"><span
                                             class="glyphicon glyphicon-trash"> </span>Delete</a>
                                 </td>

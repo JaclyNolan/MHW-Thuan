@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class HDD extends Model
 {
     use HasFactory;
-    public $table = 'brand';
+    public $table = 'hdd';
     public $primaryKey = 'id';
     public $timestamps = false;
     /**
@@ -17,7 +17,9 @@ class Brand extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
+        'size',
+        'speed'
     ];
 
     public function laptop() {

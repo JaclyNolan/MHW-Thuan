@@ -10,7 +10,5 @@ class Admin extends Model
     use HasFactory;
     public $table = 'admin';
     public $primaryKey = 'aID';
-    public $fillable = [
-        'aFullname', 'aEmail', 'aPassword', 'aPhoneNumber', 'aGender'
-    ];
+
 }

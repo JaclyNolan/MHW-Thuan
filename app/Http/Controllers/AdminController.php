@@ -39,6 +39,8 @@ class AdminController extends Controller
     public function getEdit($id)
     {
         $data['admin'] = Admin::find($id);
+        dump($data);
+
         return view('admin.admin.edit', $data);
     }
 

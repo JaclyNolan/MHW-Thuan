@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Screensize extends Model
 {
     use HasFactory;
-    public $table = 'brand';
+    public $table = 'screensize';
     public $primaryKey = 'id';
     public $timestamps = false;
     /**
@@ -17,11 +17,11 @@ class Brand extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'size'
     ];
 
     public function laptop() {
-        return $this->hasMany(Laptop::class, 'brand_id');
+        return $this->hasMany(Laptop::class, 'screensize_id');
     }
 
     public function getTableColumns() {

@@ -1,16 +1,19 @@
 @extends('admin.layout.index')
 
+@php dump($admin) @endphp
+
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Admin</h6>
+            <h6 class="m-0 font-weight-bold text-primary float-left">Admin</h6>
+            <a href="{{ asset('admin/admin/create/') }}" type="button" class="btn btn-primary float-right">Create</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>STT</th>
+                            <th style="width: 50px">STT</th>
                             <th>ID</th>
                             <th>Fullname</th>
                             <th>Email</th>
@@ -31,7 +34,7 @@
                                 @else
                                     <td>{{ "Female" }}</td>
                                 @endif
-                                <td>
+                                <td style="width: 160px">
                                     <a href="{{ asset('admin/admin/edit/' . $value->aID) }}"
                                         class="btn btn-primary edit"><span class="glyphicon glyphicon-edit"> </span>
                                         Edit</a>
