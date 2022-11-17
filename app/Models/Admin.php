@@ -10,5 +10,4 @@ class Admin extends Model
     use HasFactory;
     public $table = 'admin';
     public $primaryKey = 'aID';
-
 }

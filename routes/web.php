@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\SimpleController;
@@ -51,6 +52,16 @@ Route::group(['prefix'=>'/admin/simple'],function(){
     Route::post('/edit/{table_name}/{id}',[SimpleController::class, "update"]);
     Route::get('/delete/{table_name}/{id}',[SimpleController::class, "destroy"]);
 });
+
+Route::group(['prefix'=>'/admin/image'],function(){
+    Route::get('/',[ImageController::class, "index"])->name('admin.image.index');
+    Route::get('/create',[ImageController::class, "create"])->name('admin.image.create');
+    Route::post('/create',[ImageController::class, "store"]);
+    Route::get('/edit/{id}',[ImageController::class, "edit"])->name('admin.image.edit');
+    Route::post('/edit/{id}',[ImageController::class, "update"]);
+    Route::get('/delete/{id}',[ImageController::class, "destroy"]);
+});
+
 
 Route::get('/admin/user/show', function () {
     return view('admin.user.show');
