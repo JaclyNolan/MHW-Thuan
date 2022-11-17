@@ -1,8 +1,10 @@
 @extends('admin.layout.index')
 
+@php dump($image) @endphp
+
 @section('content')
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Laptop</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Image</h6>
     </div>
     <div class="card-body">
         <?php
@@ -15,48 +17,35 @@
         }
         ?>
         <div class="table-responsive">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 @csrf
                 <fieldset class="form-group">
                     <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input class="form-control" name="name" placeholder="Vostro 3400" value="{{ $laptop_info->name }}">
+                        <label class="my-1 mr-2">Belong to Laptop</label>
+                        <select class="custom-select my-1 mr-sm-2" name="laptop_id">
+                            <option selected value=>Choose...</option>
+                            @foreach ($laptop as $array)
+                                <option value="{{ $array['id'] }}"
+                                    {{ $image['laptop_id'] == $array['id'] ? 'selected' : false }}>
+                                    @php $bool = true @endphp
+                                    {{ $array['id'] . ' | ' . $array['name'] }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Price</label>
-                        <input class="form-control" name="price" placeholder="18000000" value="{{ $laptop_info->price }}">
+                        <label class="form-label">Can't change Image itself. You have to delete it</label> <br>
+                        <img src={{ $image['name'] }} style="max-height: 200px; max-width: 700px;">
                     </div>
                     <div class="mb-3">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" name="description" placeholder="Nice laptop, yep." id="description" rows="3"
-                            >{{ $laptop_info->description }}</textarea>
+                        @if ($image['url'] != '')
+                            <label class="form-label">URL</label>
+                            <input class="form-control" name="url" placeholder="https://amogus.png"
+                                value="{{ $image['url'] }}">
+                        @else
+                            <label class="form-label">Doesn't have an outside URL</label>
+                        @endif
                     </div>
-                    @foreach ($laptop_specs as $laptop_spec_name => $laptop_spec_array)
-                        <div class="mb-3">
-                            <label class="my-1 mr-2">{{ ucfirst($laptop_spec_name) }}</label>
-                            <select class="custom-select my-1 mr-sm-2" name="{{ $laptop_spec_name }}">
-                                <option selected value=>Choose...</option>
-                                @if (!empty($laptop_spec_array))
-                                    @foreach ($laptop_spec_array as $value)
-                                        <option value="{{ $value->id }}"
-                                            {{ $laptop_info[$laptop_spec_name . 'ID'] == $value->id ? 'selected' : false }}>
-                                            @php $bool = true @endphp
-                                            @foreach ($value as $column_name => $column_value)
-                                                @if ($bool)
-                                                    @if ($column_name != 'id')
-                                                        @php $bool = false @endphp
-                                                        {{ $column_value }}
-                                                    @endif
-                                                @else
-                                                    {{ '| ' . $column_value }}
-                                                @endif
-                                            @endforeach
-                                        </option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-                    @endforeach
                 </fieldset>
                 <button type="submit" class="btn btn-success">Submit</button>
                 <button type="reset" class="btn btn-primary">Reset</button>

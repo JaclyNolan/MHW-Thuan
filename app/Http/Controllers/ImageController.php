@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Laptop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -51,16 +52,11 @@ class ImageController extends Controller
     // Store Image
     public function store(Request $request)
     {
-        dump($request->image, $request->url);
         $request->validate([
             'laptop_id' => 'required',
             'url' => 'nullable|required_without_all:image|url|max:256',
             'image' => 'nullable|required_without_all:url|image|mimes:png,jpg,jpeg|max:2048'
         ]);
-
-        $imageName = time() . '.' . $request->image->extension();
-
-
 
         // //Store in Storage Folder
         // $request->image->storeAs('images', $imageName);
@@ -73,8 +69,11 @@ class ImageController extends Controller
         $image = new Image();
         $image->laptop_id = $request->laptop_id;
         if ($request->url == null) {
+            $imageName = time() . '.' . $request->image->extension();
             $image->name = $imageName;
             $image->url = null;
+            // Public Folder
+            $request->image->move(public_path('img'), $imageName);
         } else {
             $image->url = $request->url;
             $image->name = null;
@@ -82,32 +81,8 @@ class ImageController extends Controller
 
         $image->save();
 
-        // Public Folder
-        $request->image->move(public_path('img'), $imageName);
-
         return redirect()->route('admin.image.index');
     }
-
-
-
-
-    // public function store(Request $request, $table_name)
-    // {
-    //     $rules = $this -> rule[$table_name];
-    //     $validator = Validator::make($request->all(), $rules);
-    //     if ($validator->fails()) {
-    //         return redirect()->back()
-    //             ->withErrors($validator)
-    //             ->withInput($request->input());
-    //     }
-    //     $model = $this -> model[$table_name];
-    //     foreach ($request->except('_token') as $column_name => $column_value) {
-    //         $model[$column_name] = $column_value;
-    //     }
-    //     $model->save();
-
-    //     return redirect()->route('admin.simple.index', $table_name);
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -115,14 +90,18 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($table_name, $id)
+    public function edit($id)
     {
-        if ($this->model->get($table_name)) {
-            $array = $this->model[$table_name]::find($id)->toArray();
-            return view('admin.simple.edit', compact('array', 'table_name'));
+        $image = Image::find($id)->toArray();
+        if ($image['url'] == null) {
+            $image['name'] = asset('img/' . $image['name']);
+            //this is coded in such a scumy way but
+            //I am out of brain juice so I'm gonna leave this as it
         } else {
-            abort(404);
+            $image['name'] = $image['url'];
         }
+        $laptop = Laptop::all()->toArray();
+        return view('admin.image.edit', compact('image', 'laptop'));
     }
 
     /**
@@ -132,22 +111,28 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $table_name, $id)
+    public function update(Request $request, $id)
     {
-        $rules = $this->rule[$table_name];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput($request->input());
-        }
-        $model = $this->model[$table_name]::find($id);
-        foreach ($request->except('_token') as $column_name => $column_value) {
-            $model[$column_name] = $column_value;
-        }
-        $model->save();
+        $request->validate([
+            'laptop_id' => 'required',
+            'url' => 'string|url|max:256',
+        ]);
 
-        return redirect()->route('admin.simple.index', $table_name);
+        // //Store in Storage Folder
+        // $request->image->storeAs('images', $imageName);
+
+        // // Store in S3
+        // $request->image->storeAs('images', $imageName, 's3');
+
+        //Store Image in DB
+
+        $image = Image::find($id);
+        $image->laptop_id = $request->laptop_id;
+        $image->url = $request->url;
+
+        $image->save();
+
+        return redirect()->route('admin.image.index');
     }
 
     /**
@@ -156,10 +141,20 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($table_name, $id)
+    public function destroy($id)
     {
-        $model = $this->model[$table_name]::find($id);
-        $model->delete();
-        return back();
+        $image = Image::find($id);
+        if (!empty($image->name)) {
+            File::delete(public_path('img/' . $image->name));
+            if (!File::exists(public_path('img/' . $image->name))) {
+                $image->delete();
+                return back()->with('success', 'Image sucessfully deleted');
+            } else {
+                return back()->with('success', 'Image unsucessfully deleted');
+            }
+        } else {
+            $image->delete();
+            return back()->with('success', 'Image sucessfully deleted');
+        }
     }
 }
