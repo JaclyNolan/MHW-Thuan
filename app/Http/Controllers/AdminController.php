@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -133,5 +134,16 @@ class AdminController extends Controller
         $admin = Admin::find($id);
         $admin->delete();
         return back();
+    }
+    public function getAllAdmin(Request $request)
+    {
+      $arr = ['username' =>$request->username, 'password'=>$request->password];
+        if(Auth::attempt($arr))
+        {
+          return redirect()->route('listAdmin')->with('message', 'Sucessful');
+        }
+        else{
+          return redirect()->route('getLogin')->with('message', 'Failed');
+        }
     }
 }
