@@ -5,6 +5,7 @@ use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MyController::class, "index"]);
 
-Route::get('/blank', function(){
-    return(view('admin.layout.index'));
-});
 
 Route::group(['prefix'=>'/admin/admin'],function(){
     Route::get('/',[AdminController::class, "index"])->name('admin.admin.index');
@@ -61,6 +58,8 @@ Route::get('/admin/user/create', function () {
     return view('admin.user.create');
 });
 Route::post('/admin/user/create', [UserController::class, "create"])->name("userCreate");
+
+Route::get('',[WebController::class, "index"])->name("index");
 
 // Route::get('/demo', [MyController::class, "demo"]);
 
