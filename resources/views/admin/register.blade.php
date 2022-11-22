@@ -1,69 +1,103 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
-    </head>
-    <body>
-      <section class="text-center">
-        <!-- Background image -->
-        <div class="p-5 bg-image" style="
-              background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
-              height: 300px;
-              "></div>
-        <!-- Background image -->
-      
-        <div class="card mx-4 mx-md-5 shadow-5-strong" style="
-              margin-top: -100px;
-              background: hsla(0, 0%, 100%, 0.8);
-              backdrop-filter: blur(30px);
-              ">
-          <div class="card-body py-5 px-md-5">
-      
-            <div class="row d-flex justify-content-center">
-              <div class="col-lg-8">
-                <h2 class="fw-bold mb-5">Sign up now</h2>
-                <form>
-                  <!-- 2 column grid layout with text inputs for the username and role -->
-                  <div class="row">
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                        <input type="username" name="username" id="typeUsername" class="form-control" />
-                        <label class="form-label" for="typeUsername">Username</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                        <input type="role" name="role" id="typeRole" class="form-control" />
-                        <label class="form-label" for="typeRole">Role</label>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <!-- Email input -->
-                  <div class="form-outline mb-4">
-                    <input type="email" name="email" id="typeEmail" class="form-control" />
-                    <label class="form-label" for="typeEmail">Email</label>
-                  </div>
-      
-                  <!-- Password input -->
-                  <div class="form-outline mb-4">
-                    <input type="password" name="password" id="typePassword" class="form-control" />
-                    <label class="form-label" for="typePassword">Password</label>
-                  </div>
+<html lang="en">
 
-      
-                  <!-- Submit button -->
-                  <button type="submit" name="register" value="Register" class="btn btn-primary btn-block mb-4">
-                    Register
-                  </button>
-                  </div>
-                </form>
-              </div>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="{{asset('')}}">
+
+    <title>SB Admin 2 - Register</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="adminlr/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="adminlr/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="username" class="form-control form-control-user" id="typeUsername""
+                                            placeholder="Username">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="role" class="form-control form-control-user" id="typeRole"
+                                            placeholder="Role">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="typeEmail"
+                                        placeholder="Email Address">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                        id="typePassword" placeholder="Password">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                        id="typePassword" placeholder="Repeat Password">
+                                    </div>
+                                </div>
+                                <a href="adminlr/login.html" class="btn btn-primary btn-user btn-block">
+                                    Register Account
+                                </a>
+                                <hr>
+                                <a href="adminlr/index.html" class="btn btn-google btn-user btn-block">
+                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                </a>
+                                <a href="adminlr/index.html" class="btn btn-facebook btn-user btn-block">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                </a>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="adminlr/forgot-password.html">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="adminlr/login.html">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-    </body>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="adminlr/vendor/jquery/jquery.min.js"></script>
+    <script src="adminlr/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="adminlr/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="adminlr/js/sb-admin-2.min.js"></script>
+
+</body>
+
 </html>
