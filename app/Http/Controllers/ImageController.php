@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use App\Models\Laptop;
+use App\Models\LaptopImage;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -14,17 +16,26 @@ class ImageController extends Controller
     // View File To Upload Image
     public function index()
     {
-        $image = Image::all()->toArray();
+        $image = array();
+        $laptop_models = Laptop::all('id','name');
+        dump($laptop_models);
+        foreach ($laptop_models as $laptop_model) {
+            $image_models = $laptop_model->getImageInfoOfLaptop();
+            foreach ($image_models as &$item) {
+                $temp = $item->toArray();
+                $temp["laptop_id"] = $laptop_model->id;
+                $temp["laptop_name"] = $laptop_model->name;
+                array_push($image, $temp);
+            }
+            unset($item);
+        }
+        dump($image);
         foreach ($image as &$item) {
-            if ($item['url'] == '') {
+            if (empty($item['url'])) {
                 $item['url'] = asset('img/' . $item['name']);
             }
-            if ($item['name'] == '') {
+            if (empty($item['name'])) {
                 $item['name'] = "Using URL";
-            }
-            $laptop = Laptop::find($item['laptop_id']);
-            if ($laptop) {
-                $item['laptop_id'] = $laptop->name;
             }
         }
         unset($item);
@@ -67,7 +78,7 @@ class ImageController extends Controller
         //Store Image in DB
 
         $image = new Image();
-        $image->laptop_id = $request->laptop_id;
+
         if ($request->url == null) {
             $imageName = time() . '.' . $request->image->extension();
             $image->name = $imageName;
@@ -80,6 +91,10 @@ class ImageController extends Controller
         }
 
         $image->save();
+        $laptopImage = new LaptopImage();
+        $laptopImage->laptop_id = $request->laptop_id;
+        $laptopImage->image_id = $image->id;
+        $laptopImage->save();
 
         return redirect()->route('admin.image.index');
     }
@@ -90,9 +105,9 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($image_id, $laptop_id)
     {
-        $image = Image::find($id)->toArray();
+        $image = Image::find($image_id)->toArray();
         if ($image['url'] == null) {
             $image['name'] = asset('img/' . $image['name']);
             //this is coded in such a scumy way but
@@ -101,7 +116,7 @@ class ImageController extends Controller
             $image['name'] = $image['url'];
         }
         $laptop = Laptop::all()->toArray();
-        return view('admin.image.edit', compact('image', 'laptop'));
+        return view('admin.image.edit', compact('image', 'laptop', 'laptop_id'));
     }
 
     /**
@@ -111,7 +126,7 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $image_id, $laptop_id)
     {
         $request->validate([
             'laptop_id' => 'required',
@@ -126,11 +141,17 @@ class ImageController extends Controller
 
         //Store Image in DB
 
-        $image = Image::find($id);
-        $image->laptop_id = $request->laptop_id;
+        $image = Image::find($image_id);
         $image->url = $request->url;
 
         $image->save();
+        $laptopImage = LaptopImage::all()
+        ->where('image_id','=', $image_id)
+        ->where('laptop_id', '=', $laptop_id)->first()->delete();
+        $laptopImage = new LaptopImage();
+        $laptopImage->laptop_id = $request->laptop_id;
+        $laptopImage->image_id = $image->id;
+        $laptopImage->save();
 
         return redirect()->route('admin.image.index');
     }
@@ -141,19 +162,24 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($image_id, $laptop_id)
     {
-        $image = Image::find($id);
+        $image = Image::find($image_id);
+        $laptopImage = LaptopImage::all()
+        ->where('image_id','=', $image_id)
+        ->where('laptop_id', '=', $laptop_id)->first();
         if (!empty($image->name)) {
             File::delete(public_path('img/' . $image->name));
             if (!File::exists(public_path('img/' . $image->name))) {
                 $image->delete();
+                $laptopImage->delete();
                 return back()->with('success', 'Image sucessfully deleted');
             } else {
                 return back()->with('success', 'Image unsucessfully deleted');
             }
         } else {
             $image->delete();
+            $laptopImage->delete();
             return back()->with('success', 'Image sucessfully deleted');
         }
     }

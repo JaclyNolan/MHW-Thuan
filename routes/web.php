@@ -57,8 +57,8 @@ Route::group(['prefix'=>'/admin/image'],function(){
     Route::get('/',[ImageController::class, "index"])->name('admin.image.index');
     Route::get('/create',[ImageController::class, "create"])->name('admin.image.create');
     Route::post('/create',[ImageController::class, "store"]);
-    Route::get('/edit/{id}',[ImageController::class, "edit"])->name('admin.image.edit');
-    Route::post('/edit/{id}',[ImageController::class, "update"]);
+    Route::get('/edit/imageID={image_id}&laptopID={laptop_id}',[ImageController::class, "edit"])->name('admin.image.edit');
+    Route::post('/edit/imageID={image_id}&laptopID={laptop_id}',[ImageController::class, "update"]);
     Route::get('/delete/{id}',[ImageController::class, "destroy"]);
 });
 

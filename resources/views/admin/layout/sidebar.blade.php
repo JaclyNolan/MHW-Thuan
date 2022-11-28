@@ -65,6 +65,24 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImage"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Image</span>
+        </a>
+        <div id="collapseImage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Action:</h6>
+                <a class="collapse-item" href="admin/image">List</a>
+                <a class="collapse-item" href="admin/image/create">Create</a>
+                <a class="collapse-item" href="admin/image">Edit</a>
+                <a class="collapse-item" href="admin/image">Delete</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSimple"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
@@ -86,6 +104,7 @@
             </div>
         </div>
     </li>
+
 
     <!-- Nav Item - Utilities Collapse Menu -->
     {{-- <li class="nav-item">

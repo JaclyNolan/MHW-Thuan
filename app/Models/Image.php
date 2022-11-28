@@ -21,9 +21,9 @@ class Image extends Model
         'url'
     ];
 
-    public function laptop() {
-        return $this->belongsTo(Laptop::class, 'laptop_id');
-    }
+    // public function laptop() {
+    //     return $this->belongsTo(Laptop::class, 'laptop_id');
+    // }
 
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());

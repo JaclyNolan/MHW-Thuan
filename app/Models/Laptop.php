@@ -11,10 +11,51 @@ class Laptop extends Model
     use HasFactory;
     public $table = 'laptop';
     public $primaryKey = 'id';
-    // public $fillable = [
-    //     'lName', 'lPrice', 'lDescription', 'brandID', 'screensizeID', 'processorID', 'vgaID', 'ramID', 'colorID',
-    //     'ssdID', 'hddID', 'providerID'
-    // ];
+
+    /**
+     * Get all of images that belong to all laptops
+     *
+     *
+     * @return \Illuminate\Database\Eloquent\Collection<int, Model>
+     * The Images Model belong to the laptop
+     */
+
+    /**
+     * Get all of images that belong to the laptop
+     *
+     *
+     * @return \Illuminate\Database\Eloquent\Collection<int, Model>
+     * The Images Model belong to the laptop
+     */
+
+    public function getImageInfoOfLaptop() {
+        $laptopImage_models = LaptopImage::all()
+        ->where('laptop_id', '=', $this->id);
+        $return = array();
+        foreach ($laptopImage_models as $laptopImage_model) {
+            array_push($return, $laptopImage_model->image);
+        }
+        return $return;
+    }
+
+    /**
+     * Get all of images that belong to the laptop
+     *
+     *
+     * @return array<string> A list of image's urls belong to the laptop
+     */
+
+    public function getImageURLOfLaptop()
+    {
+        $laptopImage_models = LaptopImage::all()
+        ->where('laptop_id', '=', $this->id);
+        $return = array();
+        foreach ($laptopImage_models as $laptopImage_model) {
+            array_push($return, $laptopImage_model->image->getImage());
+        }
+        return $return;
+    }
+
     public function showAllLaptop() {
         $laptop = DB::table($this->table)
         ->select('laptop.id as laptopID','laptop.name as laptopName', 'laptop.price as laptopPrice',

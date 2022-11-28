@@ -33,15 +33,15 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $array['id'] }}</td>
                                     <td>{{ $array['name'] }}</td>
-                                    <td>{{ $array['laptop_name'] }}</td>
+                                    <td>{{ $array['laptop_id'] }}</td>
                                     <td style="width:100px">
                                         <img style='max-height: 100px; max-width: 100px;' src='{{ $array['url'] }}'>
                                     </td>
                                     <td style="width: 160px">
-                                        <a href="{{ asset('admin/image/edit/imageID=' . $array['id']) . '&laptopID=' . $array['laptop_id'] }}"
+                                        <a href="{{ asset('admin/image/edit/' . $array['id']) }}"
                                             class="btn btn-primary edit"><span class="glyphicon glyphicon-edit"> </span>
                                             Edit</a>
-                                        <a href="{{ asset('admin/image/delete/imageID=' . $array['id']) . '&laptopID=' . $array['laptop_id']}}"
+                                        <a href="{{ asset('admin/image/delete/' . $array['id']) }}"
                                             onclick="return confirm('Bạn có chắc muốn xóa?')" class="btn btn-danger"><span
                                                 class="glyphicon glyphicon-trash"> </span>Delete</a>
                                     </td>

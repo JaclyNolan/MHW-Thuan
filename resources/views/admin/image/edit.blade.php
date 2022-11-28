@@ -26,7 +26,7 @@
                             <option selected value=>Choose...</option>
                             @foreach ($laptop as $array)
                                 <option value="{{ $array['id'] }}"
-                                    {{ $image['laptop_id'] == $array['id'] ? 'selected' : false }}>
+                                    {{ $laptop_id == $array['id'] ? 'selected' : false }}>
                                     @php $bool = true @endphp
                                     {{ $array['id'] . ' | ' . $array['name'] }}
                                 </option>
@@ -34,7 +34,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Can't change Image itself. You have to delete it</label> <br>
+                        <label class="form-label">Can't change the image itself. You have to delete it</label> <br>
                         <img src={{ $image['name'] }} style="max-height: 200px; max-width: 700px;">
                     </div>
                     <div class="mb-3">
@@ -44,6 +44,7 @@
                                 value="{{ $image['url'] }}">
                         @else
                             <label class="form-label">Doesn't have an outside URL</label>
+                            <input class="form-control" type="text" placeholder="{{ $image['name']}}" readonly>
                         @endif
                     </div>
                 </fieldset>

@@ -1,6 +1,6 @@
 @extends('admin.layout.index')
 
-@php dump($laptop) @endphp
+@php dump($image) @endphp
 
 @section('content')
     <div class="card-header py-3">
@@ -26,22 +26,26 @@
                             <option selected value=>Choose...</option>
                             @foreach ($laptop as $array)
                                 <option value="{{ $array['id'] }}"
-                                    {{ old('laptop_id') == $array['id'] ? 'selected' : false }}>
+                                    {{ $image['laptop_id'] == $array['id'] ? 'selected' : false }}>
                                     @php $bool = true @endphp
                                     {{ $array['id'] . ' | ' . $array['name'] }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="mb-3">
-                        <label class="form-label"> Upload an image</label>
-                        <input type="file" class="form-control" name="image" />
+                        <label class="form-label">Can't change the image itself. You have to delete it</label> <br>
+                        <img src={{ $image['name'] }} style="max-height: 200px; max-width: 700px;">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label"> or choose an URL</label>
-                        <input class="form-control" name="url" placeholder="https://amogus.png"
-                            value="{{ old('url') }}">
+                        @if ($image['url'] != '')
+                            <label class="form-label">URL</label>
+                            <input class="form-control" name="url" placeholder="https://amogus.png"
+                                value="{{ $image['url'] }}">
+                        @else
+                            <label class="form-label">Doesn't have an outside URL</label>
+                            <input class="form-control" type="text" placeholder="{{ $image['name']}}" readonly>
+                        @endif
                     </div>
                 </fieldset>
                 <button type="submit" class="btn btn-success">Submit</button>
