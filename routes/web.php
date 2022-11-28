@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\MyController;
@@ -60,6 +61,15 @@ Route::group(['prefix'=>'/admin/image'],function(){
     Route::get('/edit/{id}',[ImageController::class, "edit"])->name('admin.image.edit');
     Route::post('/edit/{id}',[ImageController::class, "update"]);
     Route::get('/delete/{id}',[ImageController::class, "destroy"]);
+});
+
+Route::group(['prefix'=>'/admin/banner'],function(){
+    Route::get('/',[BannerController::class, "index"])->name('admin.banner.index');
+    Route::get('/create',[BannerController::class, "create"])->name('admin.banner.create');
+    Route::post('/create',[BannerController::class, "store"]);
+    Route::get('/edit/{id}',[BannerController::class, "edit"])->name('admin.banner.edit');
+    Route::post('/edit/{id}',[BannerController::class, "update"]);
+    Route::get('/delete/{id}',[BannerController::class, "destroy"]);
 });
 
 

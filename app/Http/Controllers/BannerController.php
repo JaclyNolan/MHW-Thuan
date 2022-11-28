@@ -2,31 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
-use App\Models\Laptop;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class ImageController extends Controller
+class BannerController extends Controller
 {
     // View File To Upload Image
     public function index()
     {
-        $image = Image::all()->toArray();
-        foreach ($image as &$item) {
+        $banner = Banner::all()->toArray();
+        foreach ($banner as &$item) {
             if ($item['url'] == '') {
                 $item['url'] = asset('img/' . $item['name']);
             }
             if ($item['name'] == '') {
                 $item['name'] = "Using URL";
             }
-            $laptop = Laptop::find($item['laptop_id']);
-            if ($laptop) {
-                $item['laptop_id'] = $laptop->name;
-            }
         }
         unset($item);
-        return view('admin.image.index', compact('image'));
+        return view('admin.banner.index', compact('banner'));
     }
 
     /**
@@ -43,15 +38,13 @@ class ImageController extends Controller
      */
     public function create()
     {
-        $laptop = Laptop::all()->toArray();
-        return view('admin.image.create', compact('laptop'));
+        return view('admin.banner.create');
     }
 
     // Store Image
     public function store(Request $request)
     {
         $request->validate([
-            'laptop_id' => 'required',
             'url' => 'nullable|required_without_all:image|url|max:256',
             'image' => 'nullable|required_without_all:url|image|mimes:png,jpg,jpeg|max:2048'
         ]);
@@ -64,22 +57,22 @@ class ImageController extends Controller
 
         //Store Image in DB
 
-        $image = new Image();
-        $image->laptop_id = $request->laptop_id;
+        $banner = new Banner();
+        $banner->is_actived = $request->boolean('is_actived');
         if ($request->url == null) {
             $imageName = time() . '.' . $request->image->extension();
-            $image->name = $imageName;
-            $image->url = null;
+            $banner->name = $imageName;
+            $banner->url = null;
             // Public Folder
             $request->image->move(public_path('img'), $imageName);
         } else {
-            $image->url = $request->url;
-            $image->name = null;
+            $banner->url = $request->url;
+            $banner->name = null;
         }
 
-        $image->save();
+        $banner->save();
 
-        return redirect()->route('admin.image.index');
+        return redirect()->route('admin.banner.index');
     }
 
     /**
@@ -90,16 +83,15 @@ class ImageController extends Controller
      */
     public function edit($id)
     {
-        $image = Image::find($id)->toArray();
-        if ($image['url'] == null) {
-            $image['name'] = asset('img/' . $image['name']);
+        $banner = Banner::find($id)->toArray();
+        if ($banner['url'] == null) {
+            $banner['name'] = asset('img/' . $banner['name']);
             //this is coded in such a scumy way but
             //I am out of brain juice so I'm gonna leave this as it
         } else {
-            $image['name'] = $image['url'];
+            $banner['name'] = $banner['url'];
         }
-        $laptop = Laptop::all()->toArray();
-        return view('admin.image.edit', compact('image', 'laptop'));
+        return view('admin.banner.edit', compact('banner'));
     }
 
     /**
@@ -112,7 +104,6 @@ class ImageController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'laptop_id' => 'required',
             'url' => 'string|url|max:256',
         ]);
 
@@ -124,13 +115,13 @@ class ImageController extends Controller
 
         //Store Image in DB
 
-        $image = Image::find($id);
-        $image->laptop_id = $request->laptop_id;
-        $image->url = $request->url;
+        $banner = Banner::find($id);
+        $banner->is_actived = $request->boolean('is_actived');
+        $banner->url = $request->url;
 
-        $image->save();
+        $banner->save();
 
-        return redirect()->route('admin.image.index');
+        return redirect()->route('admin.banner.index');
     }
 
     /**
@@ -141,18 +132,18 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        $image = Image::find($id);
-        if (!empty($image->name)) {
-            File::delete(public_path('img/' . $image->name));
-            if (!File::exists(public_path('img/' . $image->name))) {
-                $image->delete();
-                return back()->with('success', 'Image sucessfully deleted');
+        $banner = Banner::find($id);
+        if (!empty($banner->name)) {
+            File::delete(public_path('img/' . $banner->name));
+            if (!File::exists(public_path('img/' . $banner->name))) {
+                $banner->delete();
+                return back()->with('success', 'Banner sucessfully deleted');
             } else {
-                return back()->with('success', 'Image unsucessfully deleted');
+                return back()->with('success', 'Banner unsucessfully deleted');
             }
         } else {
-            $image->delete();
-            return back()->with('success', 'Image sucessfully deleted');
+            $banner->delete();
+            return back()->with('success', 'Banner sucessfully deleted');
         }
     }
 }
