@@ -16,11 +16,11 @@ class RegisterController extends Controller
     }
     public function postRegister(Request $request)
     {
-      $admins = new User();
-      $admins ->username = $request->username;
-      $admins ->email = $request->email;
-      $admins ->role =$request->role;
-      $admins ->password = Hash::make($request->password);
+      $admins = new Admin();
+      $admins ->aFullname = $request->username;
+      $admins ->aEmail = $request->email;
+      $admins ->aGender =$request->role;
+      $admins ->aPassword = Hash::make($request->password);
       $admins ->save();
       return redirect()->back()->with('Successful', 'Successfully created');
     }
