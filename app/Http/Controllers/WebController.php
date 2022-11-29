@@ -11,8 +11,8 @@ class WebController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index (){
-        return view('font_end.content.index');
+    public function blank(){
+        return view('front_end.content.index');
     }
-   
+
 }

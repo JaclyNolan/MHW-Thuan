@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/blank',[WebController::class, "blank"])->name('blank');
+Route::get('/admin/blank',[AdminController::class, "blank"])->name('admin.blank');
+Route::get('/admin', [MyController::class, "demo"]);
 
 
 Route::group(['prefix'=>'/admin/admin'],function(){
@@ -82,7 +85,6 @@ Route::post('/admin/user/create', [UserController::class, "create"])->name("user
 
 Route::get('',[WebController::class, "index"])->name("index");
 
-// Route::get('/demo', [MyController::class, "demo"]);
 
 // Route::get('/getForm', function () {
 //     return view('postForm');

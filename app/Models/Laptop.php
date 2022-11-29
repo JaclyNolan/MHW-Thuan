@@ -17,7 +17,7 @@ class Laptop extends Model
     // ];
     public function showAllLaptop() {
         $laptop = DB::table($this->table)
-        ->select('laptop.id as laptopID','laptop.name as laptopName', 'laptop.price as laptopPrice',
+        ->select('laptop.id as laptopID','laptop.name as laptopName', 'laptop.stock as laptopStock', 'laptop.price as laptopPrice',
          'brand.name as brandName', 'screensize.size as screenSize', 'processor.name as processorName',
          'vga.name as vgaName', 'ram.size as ramSize', 'color.name as colorName', 'ssd.size as ssdSize',
          'hdd.size as hddSize', 'provider.name as providerName')
@@ -34,7 +34,14 @@ class Laptop extends Model
 
         return $laptop;
     }
-    public function findLaptop($id) {
+
+    /**
+     * Get all of the necessary info of laptop for index page
+     *
+     * @var array<int, string>
+     */
+
+    public function showLaptop($id) {
         $laptop = DB::table($this->table)
         ->select('id' ,'name as name', 'price as price', 'description as description',
          'brandID as brand', 'screensizeID as screensize', 'processorID as processor',

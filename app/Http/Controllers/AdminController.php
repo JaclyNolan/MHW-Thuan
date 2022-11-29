@@ -14,6 +14,11 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function blank()
+    {
+        return view('admin.layout.index');
+    }
+
     public function index()
     {
         $admin = Admin::all();
