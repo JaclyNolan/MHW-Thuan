@@ -11,5 +11,4 @@ class Admin extends Authenticatable
     public $table = 'admin';
     public $primaryKey = 'aID';
     public $timestamps=false;
-
 }
