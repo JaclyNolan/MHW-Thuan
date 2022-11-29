@@ -4,7 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LaptopController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\UserController;
@@ -55,6 +57,11 @@ Route::group(['prefix'=>'/admin/simple'],function(){
     Route::get('/delete/{table_name}/{id}',[SimpleController::class, "destroy"]);
 });
 
+Route::group(['prefix'=>'/admin'],function(){
+    Route::get('/login', [LoginController::class, 'getLogin']);
+    Route::post('/login', [LoginController::class, 'postLogin']);
+    Route::get('/register', [RegisterController::class, 'getRegister']);
+    Route::post('/register', [RegisterController::class, 'postRegister']);
 Route::group(['prefix'=>'/admin/image'],function(){
     Route::get('/',[ImageController::class, "index"])->name('admin.image.index');
     Route::get('/create',[ImageController::class, "create"])->name('admin.image.create');
@@ -86,12 +93,6 @@ Route::group(['prefix'=>'/admin/order'],function(){
 Route::get('/admin/user/show', function () {
     return view('admin.user.show');
 });
-Route::post('/admin/user/show', [UserController::class, "show"])->name("userShow");
-
-Route::get('/admin/user/create', function () {
-    return view('admin.user.create');
-});
-Route::post('/admin/user/create', [UserController::class, "create"])->name("userCreate");
 
 Route::get('',[WebController::class, "index"])->name("index");
 
