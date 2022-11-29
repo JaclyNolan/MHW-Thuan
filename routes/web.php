@@ -5,6 +5,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
@@ -70,6 +71,15 @@ Route::group(['prefix'=>'/admin/banner'],function(){
     Route::get('/edit/{id}',[BannerController::class, "edit"])->name('admin.banner.edit');
     Route::post('/edit/{id}',[BannerController::class, "update"]);
     Route::get('/delete/{id}',[BannerController::class, "destroy"]);
+});
+
+Route::group(['prefix'=>'/admin/order'],function(){
+    Route::get('/',[OrderController::class, "index"])->name('admin.order.index');
+    Route::get('/create',[OrderController::class, "create"])->name('admin.order.create');
+    Route::post('/create',[OrderController::class, "store"]);
+    Route::get('/edit/{id}',[OrderController::class, "edit"])->name('admin.order.edit');
+    Route::post('/edit/{id}',[OrderController::class, "update"]);
+    Route::get('/delete/{id}',[OrderController::class, "destroy"]);
 });
 
 
