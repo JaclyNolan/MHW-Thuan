@@ -39,28 +39,49 @@
                             </div>
                             <form class="user">
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="username" class="form-control form-control-user" id="typeUsername""
+                                    <div class="col-sm-6">
+                                        <input name="username" type="username" class="form-control form-control-user" id="typeUsername""
                                             placeholder="Username">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="role" class="form-control form-control-user" id="typeRole"
-                                            placeholder="Role">
+                                        <input type="phonenumber" class="form-control form-control-user" id="typePhonenumber"
+                                            placeholder="Phonenumber">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="typeEmail"
+                                    <input name="email" type="email" class="form-control form-control-user" id="typeEmail"
                                         placeholder="Email Address">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
+                                        <input name="password" type="password" class="form-control form-control-user"
                                         id="typePassword" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
+                                        <input name="password" type="password" class="form-control form-control-user"
                                         id="typePassword" placeholder="Repeat Password">
                                     </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Gender</label>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="form-control">
+                                        <input class="form-check-input" id="male" name="gender" type="radio"
+                                            <?php if (old('gender') == 0 and old('gender') != null) {
+                                                echo 'checked';
+                                            } ?> value=0>
+                                        <label class="form-check-label" for="male">Male</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="form-control">
+                                        <input class="form-check-input" id="female" name="gender" type="radio"
+                                            <?php if (old('gender') == 1) {
+                                                echo 'checked';
+                                            } ?> value=1>
+                                        <label class="form-check-label" for="female">Female</label>
+                                    </div>
+                                </div>
                                 </div>
                                 <a href="adminlr/login.html" class="btn btn-primary btn-user btn-block">
                                     Register Account
