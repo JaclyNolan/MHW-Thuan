@@ -142,7 +142,7 @@ class AdminController extends Controller
     }
     public function getAllAdmin(Request $request)
     {
-      $arr = ['username' =>$request->username, 'password'=>$request->password];
+      $arr = ['email' =>$request->email, 'password'=>$request->password];
         if(Auth::attempt($arr))
         {
           return redirect()->route('listAdmin')->with('message', 'Sucessful');
