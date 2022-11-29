@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class trackingController extends Controller
+class homepageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index (){
-        return view('font_end.tracking.Index');
+    public function homepage(){
+        return view('font_end.homepage.homepage');
     }
    
 }

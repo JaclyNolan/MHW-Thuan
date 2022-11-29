@@ -11,8 +11,8 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index (){
-        return view('font_end.Category.Index');
+    public function Category(){
+        return view('font_end.Category.Category');
     }
    
 }

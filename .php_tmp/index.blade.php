@@ -3,11 +3,11 @@
 <!--headermenu-->
 @INCLUDE('font_end.layout.2Headermenu_area')
 <!--banner-->
-@INCLUDE('font_end.layout.3Banner_area')
 <!--feature-->
 
 <!--cart-->
-@INCLUDE('font_end.category.category')
+@yield('content')
+{{-- @INCLUDE('font_end.tracking.tracking) --}}
 
 <!--footer -->
 @INCLUDE('font_end.layout.10Footer_area')

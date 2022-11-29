@@ -1,4 +1,6 @@
-    <!--================Category Product Area =================-->
+   @extends('font_end.layout.index');
+   <!--================Category Product Area =================-->
+   @section('content')
     <section class="cat_product_area section_gap">
         <div class="container">
           <div class="row flex-row-reverse">
@@ -414,3 +416,4 @@
         </div>
       </section>
       <!--================End Category Product Area =================-->
+@endsection

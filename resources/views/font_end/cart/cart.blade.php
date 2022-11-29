@@ -1,5 +1,7 @@
 
+@extends('font_end.layout.index')
     <!--================Cart Area =================-->
+@section('content')
     <section class="cart_area">
       <div class="container">
         <div class="cart_inner">
@@ -241,3 +243,4 @@
       </div>
     </section>
     <!--================End Cart Area =================-->
+@endsection

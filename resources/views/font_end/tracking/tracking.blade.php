@@ -1,5 +1,8 @@
-    <!--================Tracking Box Area =================-->
-    <section class="tracking_box_area section_gap">
+@extends('font_end.layout.index')
+
+@section('content')
+<!--================Tracking Box Area =================-->
+    
         <div class="container">
             <div class="tracking_box_inner">
                 <p>To track your order please enter your Order ID in the box below and press the "Track" button. This was given
@@ -17,5 +20,5 @@
                 </form>
             </div>
         </div>
-    </section>
     <!--================End Tracking Box Area =================-->
+@endsection

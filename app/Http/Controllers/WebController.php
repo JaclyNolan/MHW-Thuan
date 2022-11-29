@@ -11,8 +11,23 @@ class WebController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index (){
-        return view('font_end.layout.Index');
+    public function blank(){
+        return view('font_end.layout.index');
     }
-   
+
+    public function tracking() {
+        return view('font_end.tracking.tracking');
+    }
+
+    public function homepage(){
+        return view('font_end.homepage.homepage');
+    }
+    public function cart(){
+        return view('font_end.cart.cart');
+    }
+        public function index()
+    {
+        $layout = $this -> layout -> showAlllayout();
+        return view('font_end.layout.index', compact('layout'));
+    }
 }

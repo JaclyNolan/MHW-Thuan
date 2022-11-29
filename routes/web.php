@@ -7,7 +7,7 @@ use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\homepageController;
 use App\Http\Controllers\trackingController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
@@ -62,13 +62,17 @@ Route::get('/admin/user/create', function () {
 });
 Route::post('/admin/user/create', [UserController::class, "create"])->name("userCreate");
 
-Route::get('',[WebController::class, "index"])->name("index");
+Route::get('blank',[WebController::class, "blank"])->name("blank");
 
-Route::get('',[CartController::class, "index"])->name("index");
+Route::get('cart',[CartController::class, "index"])->name("index");
 
-Route::get('',[CategoryController::class, "index"])->name("index");
+Route::get('',[WebController::class, "homepage"])->name("homepage");
 
-Route::get('',[trackingController::class, "index"])->name("index");
+Route::get('/cart',[CartController::class, "cart"])->name("cart");
+
+Route::get('tracking',[WebController::class, "tracking"])->name("tracking");
+
+
 // Route::get('/demo', [MyController::class, "demo"]);
 
 // Route::get('/getForm', function () {
