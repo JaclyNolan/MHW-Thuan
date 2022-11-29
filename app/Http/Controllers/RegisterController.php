@@ -19,8 +19,9 @@ class RegisterController extends Controller
       $admins = new Admin();
       $admins ->aFullname = $request->username;
       $admins ->aEmail = $request->email;
-      $admins ->aGender =$request->role;
+      $admins ->aGender =$request->gender;
       $admins ->aPassword = Hash::make($request->password);
+      $admins ->aPhonenumber = $request->phonenumber;
       $admins ->save();
       return redirect()->back()->with('Successful', 'Successfully created');
     }

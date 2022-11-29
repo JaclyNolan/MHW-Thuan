@@ -24,6 +24,12 @@
 </head>
 
 <body class="bg-gradient-primary">
+    @if (session('message'))
+<span class="aler alert-danger">
+    <strong>{{ session('message') }}</strong>
+</span>
+    	
+@endif
 
     <div class="container">
 
@@ -37,19 +43,20 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" method="POST" action="">
+                                @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6">
-                                        <input name="username" type="username" class="form-control form-control-user" id="typeUsername""
+                                        <input name="username" type="text" class="form-control form-control-user" id="typeUsername"
                                             placeholder="Username">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="phonenumber" class="form-control form-control-user" id="typePhonenumber"
+                                        <input name = "phonenumber" type="text" class="form-control form-control-user" id="typePhonenumber"
                                             placeholder="Phonenumber">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input name="email" type="email" class="form-control form-control-user" id="typeEmail"
+                                    <input name="email" type="text" class="form-control form-control-user" id="typeEmail"
                                         placeholder="Email Address">
                                 </div>
                                 <div class="form-group row">
@@ -83,10 +90,9 @@
                                     </div>
                                 </div>
                                 </div>
-                                <a href="adminlr/login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
+                                <input type ="submit" name ="register" value="Register Account" class="btn btn-primary btn-user btn-block">
                                 <hr>
+
                                 <a href="adminlr/index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
                                 </a>

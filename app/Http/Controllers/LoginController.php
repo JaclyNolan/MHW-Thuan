@@ -13,7 +13,7 @@ class LoginController extends Controller
     }
     public function postLogin(Request $request)
     {
-        $arr = ['username' =>$request->username, 'password'=>$request->password];
+        $arr = ['aFullname' =>$request->username, 'aPassword'=>$request->password];
         if(Auth::attempt($arr))
         {
             dd('Successful');
