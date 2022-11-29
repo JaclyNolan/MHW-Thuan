@@ -51,7 +51,7 @@
                                             placeholder="Username">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input name = "phonenumber" type="text" class="form-control form-control-user" id="typePhonenumber"
+                                        <input name = "phone_number" type="text" class="form-control form-control-user" id="typePhonenumber"
                                             placeholder="Phonenumber">
                                     </div>
                                 </div>

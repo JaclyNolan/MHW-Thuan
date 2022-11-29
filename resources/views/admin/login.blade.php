@@ -44,9 +44,9 @@
                                     </div>
                                     <form role ="form" action="" method="post">
                                         <div class="form-group">
-                                            <input name = "username" type="username" class="form-control form-control-user"
+                                            <input name = "email" type="text" class="form-control form-control-user"
                                             id="typeUsernameX-2" aria-describedby="emailHelp"
-                                                placeholder="Enter Username...">
+                                                placeholder="Enter Email...">
                                         </div>
                                         <div class="form-group">
                                             <input name="password" type="password" class="form-control form-control-user"
@@ -58,9 +58,7 @@
                                                 <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
-                                        <a type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <input type ="submit" name ="login" value="Login" class="btn btn-primary btn-user btn-block">
                                         <hr>
                                         <a href="adminlr/index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
