@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LaptopController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
@@ -23,6 +28,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/blank',[WebController::class, "blank"])->name('blank');
+Route::get('/admin/blank',[AdminController::class, "blank"])->name('admin.blank');
+Route::get('/admin', [MyController::class, "demo"]);
 
 
 Route::group(['prefix'=>'/admin/admin'],function(){
@@ -52,15 +60,44 @@ Route::group(['prefix'=>'/admin/simple'],function(){
     Route::get('/delete/{table_name}/{id}',[SimpleController::class, "destroy"]);
 });
 
+Route::group(['prefix'=>'/admin'],function(){
+    Route::get('/login', [LoginController::class, 'getLogin']);
+    Route::post('/login', [LoginController::class, 'postLogin']);
+    Route::get('/register', [RegisterController::class, 'getRegister']);
+    Route::post('/register', [RegisterController::class, 'postRegister']);
+});
+
+Route::group(['prefix'=>'/admin/image'],function(){
+    Route::get('/',[ImageController::class, "index"])->name('admin.image.index');
+    Route::get('/create',[ImageController::class, "create"])->name('admin.image.create');
+    Route::post('/create',[ImageController::class, "store"]);
+    Route::get('/edit/{id}',[ImageController::class, "edit"])->name('admin.image.edit');
+    Route::post('/edit/{id}',[ImageController::class, "update"]);
+    Route::get('/delete/{id}',[ImageController::class, "destroy"]);
+});
+
+Route::group(['prefix'=>'/admin/banner'],function(){
+    Route::get('/',[BannerController::class, "index"])->name('admin.banner.index');
+    Route::get('/create',[BannerController::class, "create"])->name('admin.banner.create');
+    Route::post('/create',[BannerController::class, "store"]);
+    Route::get('/edit/{id}',[BannerController::class, "edit"])->name('admin.banner.edit');
+    Route::post('/edit/{id}',[BannerController::class, "update"]);
+    Route::get('/delete/{id}',[BannerController::class, "destroy"]);
+});
+
+Route::group(['prefix'=>'/admin/order'],function(){
+    Route::get('/',[OrderController::class, "index"])->name('admin.order.index');
+    Route::get('/create',[OrderController::class, "create"])->name('admin.order.create');
+    Route::post('/create',[OrderController::class, "store"]);
+    Route::get('/edit/{id}',[OrderController::class, "edit"])->name('admin.order.edit');
+    Route::post('/edit/{id}',[OrderController::class, "update"]);
+    Route::get('/delete/{id}',[OrderController::class, "destroy"]);
+});
+
+
 Route::get('/admin/user/show', function () {
     return view('admin.user.show');
 });
-Route::post('/admin/user/show', [UserController::class, "show"])->name("userShow");
-
-Route::get('/admin/user/create', function () {
-    return view('admin.user.create');
-});
-Route::post('/admin/user/create', [UserController::class, "create"])->name("userCreate");
 
 Route::get('blank',[WebController::class, "blank"])->name("blank");
 
@@ -73,7 +110,6 @@ Route::get('/cart',[CartController::class, "cart"])->name("cart");
 Route::get('tracking',[WebController::class, "tracking"])->name("tracking");
 
 
-// Route::get('/demo', [MyController::class, "demo"]);
 
 // Route::get('/getForm', function () {
 //     return view('postForm');
