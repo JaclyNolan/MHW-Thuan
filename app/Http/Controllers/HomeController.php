@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\front_end;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Laptop;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this ->laptop = new Laptop();
+    }
     public function index()
     {
-        return view('front_end.contents.index');
+        $laptop = $this -> laptop -> showAllLaptop();
+        $image = $this->laptop->getImage();
+        
+        return view('front_end.contents.index', compact('laptop', 'image'));
     }
 
     public function shop()

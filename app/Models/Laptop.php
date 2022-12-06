@@ -52,6 +52,13 @@ class Laptop extends Model
 
         return $laptop;
     }
+    public function getImage()
+    {
+        $image = DB::table('image')
+        ->select('*')
+        ->get();
+        return $image;
+    }
     public function getLaptopSpec() {
         $data['brand'] = DB::table('brand')
         ->select('brand.*')->get();
