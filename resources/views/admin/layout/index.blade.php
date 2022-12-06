@@ -6,34 +6,34 @@
 
 @INCLUDE('admin.layout.topbar')
 
-
-<!-- Main Content -->
-
-
-<!-- Begin Page Content -->
-
-
-@yield('content')
+    
+    <!-- Main Content -->
+    
+    
+    <!-- Begin Page Content -->
 
 
-
-<!-- /.container-fluid -->
-
+    @yield('content')
 
 
-<!-- End of Main Content -->
-
-@INCLUDE('admin.layout.footer')
-
+    
+    <!-- /.container-fluid -->
 
 
-<!-- End of Content Wrapper -->
+    
+    <!-- End of Main Content -->
 
-<!-- End of Page Wrapper -->
-
-@INCLUDE('admin.layout.js')
+    @INCLUDE('admin.layout.footer')
 
 
-</body>
+    
+    <!-- End of Content Wrapper -->
 
-</html>
+    <!-- End of Page Wrapper -->
+
+    @INCLUDE('admin.layout.js')
+
+
+    </body>
+
+    </html>

@@ -18,7 +18,6 @@
                             <th style="width: 50px">STT</th>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Stock</th>
                             <th>Price</th>
                             <th>Brand</th>
                             <th>Screen</th>
@@ -37,7 +36,6 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $value->laptopID }}</td>
                                 <td>{{ $value->laptopName }}</td>
-                                <td>{{ $value->laptopStock }}</td>
                                 <td>{{ $value->laptopPrice }}</td>
                                 <td>{{ $value->brandName }}</td>
                                 <td>{{ $value->screenSize }}</td>

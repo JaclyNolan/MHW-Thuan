@@ -62,7 +62,6 @@ class LaptopController extends Controller
     {
         $rules = array(
             "name" => 'required',
-            "stock" => 'required|numeric',
             "price" => 'required|numeric',
             "description" => 'required',
             "*" => 'required'
@@ -76,10 +75,9 @@ class LaptopController extends Controller
         }
         $laptop = new Laptop;
         $laptop->name = $request->name;
-        $laptop->stock = $request->stock;
         $laptop->price = $request->price;
         $laptop->description = $request->description;
-        foreach ($request->except('_token','name', 'stock','price','description') as $laptop_spec_name => $laptop_spec_id) {
+        foreach ($request->except('_token','name','price','description') as $laptop_spec_name => $laptop_spec_id) {
             $laptop[$laptop_spec_name . "ID"] = $laptop_spec_id;
         }
         $laptop->timestamps = false;
@@ -98,7 +96,6 @@ class LaptopController extends Controller
         $rules = array(
             "name" => 'required',
             "price" => 'required|numeric',
-            "stock" => 'required|numeric',
             "description" => 'required',
             "*" => 'required'
         );
@@ -112,9 +109,8 @@ class LaptopController extends Controller
         $laptop = Laptop::find($id);
         $laptop->name = $request->name;
         $laptop->price = $request->price;
-        $laptop->stock = $request->stock;
         $laptop->description = $request->description;
-        foreach ($request->except('_token','name', 'stock','price','description') as $laptop_spec_name => $laptop_spec_id) {
+        foreach ($request->except('_token','name','price','description') as $laptop_spec_name => $laptop_spec_id) {
             $laptop[$laptop_spec_name . "ID"] = $laptop_spec_id;
         }
         $laptop->timestamps = false;
