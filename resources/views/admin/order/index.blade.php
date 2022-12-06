@@ -30,7 +30,7 @@
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Phonenumber</th>
-                                <th>ID</th>
+                                <th>Name</th>
                                 <th>Old Price</th>
                                 <th>Quanity</th>
                             </tr>

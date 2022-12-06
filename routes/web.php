@@ -62,6 +62,8 @@ Route::group(['prefix'=>'/admin'],function(){
     Route::post('/login', [LoginController::class, 'postLogin']);
     Route::get('/register', [RegisterController::class, 'getRegister']);
     Route::post('/register', [RegisterController::class, 'postRegister']);
+});
+
 Route::group(['prefix'=>'/admin/image'],function(){
     Route::get('/',[ImageController::class, "index"])->name('admin.image.index');
     Route::get('/create',[ImageController::class, "create"])->name('admin.image.create');
