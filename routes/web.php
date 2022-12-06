@@ -60,7 +60,10 @@ Route::group(['prefix'=>'/admin'],function(){
     Route::get('/register', [RegisterController::class, 'getRegister']);
     Route::post('/register', [RegisterController::class, 'postRegister']);
 });
-
+Route::group(['prefix'=>'/admin'],function(){
+    Route::get('/login', [LoginController::class, 'login'])->name('admin.admin.index');
+    Route::get('/register', [RegisterController::class, 'register']);
+});
 // Route::get('/demo', [MyController::class, "demo"]);
 
 // Route::get('/getForm', function () {

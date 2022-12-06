@@ -24,6 +24,6 @@ class LoginController extends Controller
     }
     public function getLogout(){
         Auth::logout();
-        return redirect()->intended('login');
+        return redirect()->route('admin.admin.index')->with('Successful', 'Successfully created');
     }
 }
