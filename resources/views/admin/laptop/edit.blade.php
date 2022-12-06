@@ -23,6 +23,10 @@
                         <input class="form-control" name="name" placeholder="Vostro 3400" value="{{ $laptop_info->name }}">
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Stock</label>
+                        <input class="form-control" name="stock" placeholder="1" value="{{ $laptop_info->stock }}">
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Price</label>
                         <input class="form-control" name="price" placeholder="18000000" value="{{ $laptop_info->price }}">
                     </div>
