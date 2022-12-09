@@ -99,24 +99,15 @@ Route::get('/admin/user/show', function () {
     return view('admin.user.show');
 });
 
-Route::get('blank',[WebController::class, "blank"])->name("blank");
-
-Route::get('cart',[CartController::class, "index"])->name("index");
-
-Route::get('',[WebController::class, "homepage"])->name("homepage");
-
-Route::get('/cart',[CartController::class, "cart"])->name("cart");
-
-Route::get('tracking', [WebController::class, "tracking"])->name("tracking");
 
 
 Route::group(['prefix' => 'FrontEnd'], function () {
     Route::get('/', [HomeController::class, "index"])->name('index');
     Route::get('shop/', [HomeController::class, "shop"])->name('shop');
-    Route::get('shopdetails/', [HomeController::class, "shopdetails"])->name('shopdetails');
+    Route::get('shopdetails/{id}', [HomeController::class, "shopdetails"])->name('shopdetails');
     Route::get('cart/', [HomeController::class, "cart"])->name('cart');
     Route::get('checkout/', [HomeController::class, "checkout"])->name('checkout');
-    // Route::get('/edit/{id}',[AdminController::class, "getEdit"])->name('admin.admin.edit');
+    Route::get('/cart}',[CartController::class, "Cart"])->name('cart');
     // Route::post('/edit/{id}',[AdminController::class, "postEdit"]);
     // Route::get('/delete/{id}',[AdminController::class, "destroy"]);
 });

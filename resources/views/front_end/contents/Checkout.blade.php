@@ -19,7 +19,7 @@
             <h4>Billing Details</h4>
             <form action="#">
                 <div class="row">
-                    <div class="col-lg-8 col-md-6">
+                    {{--<div class="col-lg-8 col-md-6">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
@@ -94,7 +94,7 @@
                             <input type="text"
                                 placeholder="Notes about your order, e.g. special notes for delivery.">
                         </div>
-                    </div>
+                    </div>--}}
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
                             <h4>Your Order</h4>

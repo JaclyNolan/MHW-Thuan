@@ -203,11 +203,29 @@
                     </div>
                 </div>
             </div>
+            {{-- @foreach ($FeaturedRecent0 as $new0)
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="#">{{$new0->name}}</a></h6>
+                                <h5>$30.00</h5>
+                            </div>
+                        </div>
+                </div>
+            @endforeach --}}
             <div class="row featured__filter">
-                @foreach ($laptop as $key => $value)
+               @foreach ($laptop as $key => $value)
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="featured__item">
                             @php 
+                            
                             $laptopImage = $image->where('laptop_id', '=', $value->laptopID)->first();
                             
                             @endphp
@@ -222,6 +240,7 @@
                             <div class="featured__item__text">
                                 <h6><a href="#">{{ $value->laptopName }}</a></h6>
                                 <h5>{{ $value->laptopPrice }} VND</h5>
+                                <a href="{{asset('FrontEnd/shopdetails/'.$value->laptopID)}}">Detail</a>
                             </div>
                         </div>
                     </div>

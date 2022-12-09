@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Laptop;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use SNMP;
 
 class HomeController extends Controller
 {
@@ -15,7 +17,7 @@ class HomeController extends Controller
     {
         $laptop = $this -> laptop -> showAllLaptop();
         $image = $this->laptop->getImage();
-        
+       
         return view('front_end.contents.index', compact('laptop', 'image'));
     }
 
@@ -34,8 +36,16 @@ class HomeController extends Controller
         return view('front_end.contents.checkout');
     }
 
-    public function shopdetails()
+    public function shopdetails(Request $request)
     {
-        return view('front_end.contents.shopdetails');
+        // $laptop = $this -> laptop -> showAllLaptop();
+        // $image = $this->laptop->getImage();
+        // return view('front_end.contents.shopdetails', compact('laptop', 'image'));
+
+        $ProductDetail = Laptop::WHERE('id',$request->id)->first();
+        $ProductDetailimg = Image::WHERE('id',$request->id)->first();
+
+
+        return view('front_end.contents.shopdetails', compact('ProductDetail','ProductDetailimg'));
     }
 }
