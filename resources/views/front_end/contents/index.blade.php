@@ -239,7 +239,7 @@
                             </div>
                             <div class="featured__item__text">
                                 <h6><a href="#">{{ $value->laptopName }}</a></h6>
-                                <h5>{{ $value->laptopPrice }} VND</h5>
+                               <h5>{{ $value->laptopPrice }} VND</h5>
                                 <a href="{{asset('FrontEnd/shopdetails/'.$value->laptopID)}}">Detail</a>
                             </div>
                         </div>

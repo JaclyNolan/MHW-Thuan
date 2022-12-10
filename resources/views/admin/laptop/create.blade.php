@@ -31,7 +31,7 @@
                     <div class="mb-3">
                         <label class="form-label">Stock</label>
                         <input class="form-control" name="stock" placeholder="1" value="{{ old('stock') }}">
-                    </div>
+                   </div>
                     <div class="mb-3">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description" placeholder="Nice laptop, yep." id="description" rows="3"

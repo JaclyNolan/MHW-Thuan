@@ -156,29 +156,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-1.jpg" alt="">
-                                    <h5>Vegetable’s Package</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    $55.00
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    $110.00
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
-                            <tr>
+                            <?php $total = 0 ?>
+                           @if(session('cart'))
+                                @foreach((array) session('cart') as $id => $details)
+                                    <?php $total += $details['price'] * $details['Stock'] ?>
+                                        <tr>
+                                            <td class="shoping__cart__item">
+                                                <img src="{{asset('img/'.$details['name'])}}" alt="">
+                                                <h5>&nbsp &nbsp{{$details['name']}}</h5>
+                                            </td>
+                                            <td class="shoping__cart__price">
+                                                ${{$details['price']}}
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                                <div class="quantity">
+                                                    <div class="pro-qty">
+                                                        <input type="text" value="{{$details['Stock']}}">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="shoping__cart__total">
+                                                ${{$details['price'] * $details['Stock']}}
+                                            </td>
+                                            <td class="shoping__cart__item__close">
+                                                <span class="icon_close"></span>
+                                            </td>
+                                        </tr>
+                                @endforeach
+                            @endif
+                            {{-- <tr>
                                 <td class="shoping__cart__item">
                                     <img src="img/cart/cart-2.jpg" alt="">
                                     <h5>Fresh Garden Vegetable</h5>
@@ -221,7 +227,7 @@
                                 <td class="shoping__cart__item__close">
                                     <span class="icon_close"></span>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>

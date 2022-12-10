@@ -106,13 +106,24 @@ Route::group(['prefix' => 'FrontEnd'], function () {
     Route::get('shop/', [HomeController::class, "shop"])->name('shop');
     Route::get('shopdetails/{id}', [HomeController::class, "shopdetails"])->name('shopdetails');
     Route::get('cart/', [HomeController::class, "cart"])->name('cart');
-    Route::get('checkout/', [HomeController::class, "checkout"])->name('checkout');
+    Route::get('checkout/{id}', [HomeController::class, "checkout"])->name('checkout');
     Route::get('/cart}',[CartController::class, "Cart"])->name('cart');
     // Route::post('/edit/{id}',[AdminController::class, "postEdit"]);
     // Route::get('/delete/{id}',[AdminController::class, "destroy"]);
 });
 
+// route add to cart
+    Route::group(['prefix' =>'cart'], function()
+    {
+        Route::get('ShoppingCart/',[CartController::class,'cart'])->name('cart');
+            
+        Route::get('add-to-cart/{id}',[CartController::class,'addtocart'])->name('addtocart');
 
+        Route::post('/update-cart/{id}',[CartController::class,'updatecart'])->name('updatecart');
+
+        Route::delete('deletecart/{id}',[CartController::class,'delete']);
+            
+    });
 
 
 // Route::get('/getForm', function () {

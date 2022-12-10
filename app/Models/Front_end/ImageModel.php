@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Front_end;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
-class Image extends Model
+class ImageModel extends Model
 {
     use HasFactory;
     public $table = 'image';
@@ -31,7 +32,7 @@ class Image extends Model
 
     public function getImage() {
         if ($this->url == "") {
-            return asset('img/' . $this->name);
+            return asset('images/' . $this->name);
         }
         elseif ($this->name == "") {
             return $this->url;

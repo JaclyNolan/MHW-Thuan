@@ -34,7 +34,7 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="img/{{$ProductDetailimg->name}}" alt="">
+                               src="{{$ProductDetailimg->getImage()}}" alt="">
                         </div>
                        {{-- <div class="product__details__pic__slider owl-carousel">
                             <img data-imgbigurl="images/product/details/product-details-2ages"
@@ -61,15 +61,16 @@
                         </div>
                         <div class="product__details__price">${{$ProductDetail->price}}</div>
                         <p>Description: {{$ProductDetail->description}}</p>
-                        <p>Brand: {{$ProductDetail->Brand}}</p>
+                        {{-- <p>Brand: {{$ProductDetailBrand->name}}</p> --}}
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                   <input type="text" value="1">
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="{{$ProductDetail->Brand}}">ADD TO CARD</a>
+                       <a href="{{asset('cart/add-to-cart/'.$ProductDetail->id)}}" class="primary-btn">ADD TO CARD</a>
+                       <a href="{{asset('FrontEnd/checkout/'.$ProductDetail->id)}}" class="primary-btn danger">CHECK OUT</a>
                         {{--<a href="#" class="primary-btn">ADD TO CARD</a>--}}
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                        {{--}} <ul>
