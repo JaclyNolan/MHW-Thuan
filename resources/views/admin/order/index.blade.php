@@ -10,7 +10,7 @@
     @endif
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary float-left">Image</h6>
+                <h6 class="m-0 font-weight-bold text-primary float-left">Order</h6>
                 <a href="{{ asset('admin/order/create/') }}" type="button" class="btn btn-primary float-right">Create</a>
             </div>
             <div class="col-md-12 bg-light text-right">

@@ -9,7 +9,6 @@ use App\Http\Controllers\MyController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SimpleController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;

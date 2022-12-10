@@ -29,7 +29,7 @@ class Image extends Model
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
 
-    public function getImage() {
+    public function getImages() {
         if ($this->url == "") {
             return asset('img/' . $this->name);
         }
