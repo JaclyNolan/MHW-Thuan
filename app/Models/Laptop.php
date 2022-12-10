@@ -15,6 +15,39 @@ class Laptop extends Model
     //     'lName', 'lPrice', 'lDescription', 'brandID', 'screensizeID', 'processorID', 'vgaID', 'ramID', 'colorID',
     //     'ssdID', 'hddID', 'providerID'
     // ];
+
+    public function images() {
+        return $this->hasMany(Image::class);
+    }
+
+    public function brand() {
+        return $this->belongsTo(Brand::class, 'brandID');
+    }
+    public function screensize() {
+        return $this->belongsTo(Screensize::class, 'screensizeID');
+    }
+    public function processor() {
+        return $this->belongsTo(Processor::class, 'processorID');
+    }
+    public function vga() {
+        return $this->belongsTo(VGA::class, 'vgaID');
+    }
+    public function ram() {
+        return $this->belongsTo(RAM::class, 'ramID');
+    }
+    public function color() {
+        return $this->belongsTo(Color::class, 'colorID');
+    }
+    public function ssh() {
+        return $this->belongsTo(SSH::class, 'sshID');
+    }
+    public function provider() {
+        return $this->belongsTo(Provider::class, 'providerID');
+    }
+    public function hdd() {
+        return $this->belongsTo(HDD::class, 'hddID');
+    }
+
     public function showAllLaptop() {
         $laptop = DB::table($this->table)
         ->select('laptop.id as laptopID','laptop.name as laptopName', 'laptop.stock as laptopStock', 'laptop.price as laptopPrice',
@@ -59,6 +92,8 @@ class Laptop extends Model
         ->get();
         return $image;
     }
+
+
     public function getLaptopSpec() {
         $data['brand'] = DB::table('brand')
         ->select('brand.*')->get();
