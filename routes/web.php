@@ -111,6 +111,12 @@ Route::group(['prefix' => 'FrontEnd'], function () {
     // Route::get('/delete/{id}',[AdminController::class, "destroy"]);
 });
 
+Route::group(['prefix' => 'order'], function () {
+    Route::get('/', [OrderController::class, "getFind"]);
+    Route::post('/', [OrderController::class, "postFind"]);
+    Route::get('result', [OrderController::class, "result"]);
+});
+
 
 
 

@@ -139,4 +139,27 @@ class OrderController extends Controller
         $order->delete();
         return back();
     }
+    ///////////////////////////////////////////////////////////
+    //User Side
+
+    public function getFind()
+    {
+        return view('front_end.contents.order');
+    }
+    public function postFind(Request $request)
+    {
+        $request->validate([
+            'customer_phonenumber' => 'required|numeric',
+        ]);
+
+        $customer_phonenumber = $request->customer_phonenumber;
+        $order = Order::where("customer_phonenumber", "=", $request->customer_phonenumber)->get();
+        if ($order->isEmpty()) {
+            //is empty -> phonenumber is invalid
+            return redirect('order')->with('failure', 'Phonenumber is invalid');
+        } else {
+            //is not empty -> phonenumber is valid
+            return view('front_end.contents.orderResult', compact('order', 'customer_phonenumber'));
+        }
+    }
 }
