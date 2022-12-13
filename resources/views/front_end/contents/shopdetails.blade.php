@@ -11,10 +11,10 @@
                     <div class="breadcrumb__text">
                         <h2>Details Product</h2>
                         <div class="breadcrumb__option">
-                            <a href="{{asset('FrontEnd/')}}">Home</a>
-                            <li><a href="{{asset('FrontEnd/shopdetails/')}}">Shop Details</a></li>
-                            <li><a href="{{asset('FrontEnd/cart/')}}">Shoping Cart</a></li>
-                            <li><a href="{{asset('FrontEnd/checkout/')}}">Check Out</a></li>                          
+                            <a href="{{asset('')}}">Home</a>
+                            <li><a href="{{asset('shopdetails/')}}">Shop Details</a></li>
+                            <li><a href="{{asset('cart/')}}">Shoping Cart</a></li>
+                            <li><a href="{{asset('checkout/')}}">Check Out</a></li>
                             <li></li><a href="./index.html"></a></li>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                       <a href="{{asset('FrontEnd/checkout/'.$ProductDetail->id)}}" class="primary-btn danger">CHECK OUT</a> --}}
+                       <a href="{{asset('checkout/'.$ProductDetail->id)}}" class="primary-btn danger">CHECK OUT</a> --}}
                         {{--<a href="#" class="primary-btn">ADD TO CARD</a>--}}
                         <form action="" method="post">
                             @csrf

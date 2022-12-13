@@ -101,7 +101,6 @@ Route::get('/admin/user/show', function () {
 
 
 
-Route::group(['prefix' => 'FrontEnd'], function () {
     Route::get('/', [HomeController::class, "index"])->name('index');
     Route::get('shop/', [HomeController::class, "shop"])->name('shop');
     Route::get('shopdetails/{id}', [HomeController::class, "shopdetails"])->name('shopdetails');
@@ -112,20 +111,19 @@ Route::group(['prefix' => 'FrontEnd'], function () {
     Route::get('/cart}',[CartController::class, "Cart"])->name('cart');
     // Route::post('/edit/{id}',[AdminController::class, "postEdit"]);
     // Route::get('/delete/{id}',[AdminController::class, "destroy"]);
-});
 
 // route add to cart
     Route::group(['prefix' =>'cart'], function()
     {
         Route::get('ShoppingCart/',[CartController::class,'cart'])->name('cart');
-            
+
         Route::get('add-to-cart/{id}',[CartController::class,'addtocart'])->name('addtocart');
 
 
         Route::post('/update-cart/{id}',[CartController::class,'updatecart'])->name('updatecart');
 
         Route::delete('deletecart/{id}',[CartController::class,'delete']);
-            
+
     });
 
 Route::group(['prefix' => 'order'], function () {

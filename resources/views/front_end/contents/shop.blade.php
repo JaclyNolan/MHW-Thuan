@@ -1,5 +1,5 @@
 <!-- Page Wrapper -->
-@INCLUDE('front_end.layouts.head') 
+@INCLUDE('front_end.layouts.head')
 
 <!-- Page Wrapper -->
 @INCLUDE('front_end.layouts.headerAll')
@@ -56,14 +56,14 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="{{asset('FrontEnd/')}}">Home</a></li>
-                            <li class="active"><a href="{{asset('FrontEnd/shop/')}}">Shop</a></li>
+                            <li><a href="{{asset('')}}">Home</a></li>
+                            <li class="active"><a href="{{asset('shop/')}}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="{{asset('FrontEnd/shopdetails/')}}">Shop Details</a></li>
-                                    <li><a href="{{asset('FrontEnd/cart/')}}">Shoping Cart</a></li>
-                                    <li><a href="{{asset('FrontEnd/Checkout/')}}">Check Out</a></li>
-                                    <li><a href="{{asset('FrontEnd/shop/')}}">Blog Details</a></li>
+                                    <li><a href="{{asset('shopdetails/')}}">Shop Details</a></li>
+                                    <li><a href="{{asset('cart/')}}">Shoping Cart</a></li>
+                                    <li><a href="{{asset('Checkout/')}}">Check Out</a></li>
+                                    <li><a href="{{asset('shop/')}}">Blog Details</a></li>
                                 </ul>
                             </li>
                             <li><a href="./blog.html">Blog</a></li>

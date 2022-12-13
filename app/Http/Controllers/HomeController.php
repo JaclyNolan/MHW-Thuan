@@ -17,7 +17,7 @@ class HomeController extends Controller
     {
         $laptop = $this -> laptop -> showAllLaptop();
         $image = $this->laptop->getImage();
-       
+
         return view('front_end.contents.index', compact('laptop', 'image'));
     }
 
@@ -33,7 +33,7 @@ class HomeController extends Controller
 
     public function checkout($id, $quantity)
     {
-        
+
         $ProductDetail = Laptop::WHERE('id',$id)->first();
         return view('front_end.contents.checkout',  compact('ProductDetail', 'quantity'));
     }
@@ -64,7 +64,7 @@ class HomeController extends Controller
     }
 
     public function postShopDetails(Request $request) {
-        return redirect('FrontEnd/checkout/id=' . $request->id . '&quantity=' . $request->quantity);
+        return redirect('checkout/id=' . $request->id . '&quantity=' . $request->quantity);
     }
 
     public function shopdetails(Request $request)
@@ -75,7 +75,7 @@ class HomeController extends Controller
 
         $ProductDetail = Laptop::WHERE('id',$request->id)->first();
         // $ProductDetailBrand = Brand::WHERE('id',$request->id)->first();
-    
+
 
         return view('front_end.contents.shopdetails', compact('ProductDetail'));
     }

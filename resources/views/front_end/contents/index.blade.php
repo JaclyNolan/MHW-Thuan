@@ -1,93 +1,7 @@
-<!-- Page Wrapper -->
-@INCLUDE('front_end.layouts.head') 
+@extends('front_end.layouts.index')
 
-<!-- Page Wrapper -->
-@INCLUDE('front_end.layouts.headerAll')
-
+@section('content')
 <!-- start contents -->
-
-<!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i> Khanhlinhyknb95@gmail.com</li>
-                                <li>Free Shipping for all Order of $99</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <img src="img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">TiengViet</a></li>
-                                    <li><a href="#">Chinese</a></li>
-                                    <li><a href="#">日本</a></li>
-                                </ul>
-                            </div>
-                            <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo2.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="{{asset('FrontEnd/')}}">Home</a></li>
-                            <li><a href="{{asset('FrontEnd/shop/')}}">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="{{asset('FrontEnd/shopdetails/')}}">Shop Details</a></li>
-                                    <li><a href="{{asset('FrontEnd/cart/')}}">Shoping Cart</a></li>
-                                    <li><a href="{{asset('FrontEnd/checkout/')}}">Check Out</a></li>
-                                    <li><a href="{{asset('FrontEnd/blog/')}}">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section End -->
-
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="container">
@@ -224,10 +138,10 @@
                @foreach ($laptop as $key => $value)
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="featured__item">
-                            @php 
-                            
+                            @php
+
                             $laptopImage = $image->where('laptop_id', '=', $value->laptopID)->first();
-                            
+
                             @endphp
                             @if (!empty($laptopImage))
                             @php if (empty($laptopImage->url)) {
@@ -240,7 +154,7 @@
                             <div class="featured__item__text">
                                 <h6><a href="#">{{ $value->laptopName }}</a></h6>
                                <h5>${{ $value->laptopPrice }}</h5>
-                                <a href="{{asset('FrontEnd/shopdetails/'.$value->laptopID)}}">Detail</a>
+                                <a href="{{asset('shopdetails/'.$value->laptopID)}}">Detail</a>
                             </div>
                         </div>
                     </div>
@@ -269,11 +183,6 @@
     </div>
     <!-- Banner End -->
 
-   
+
 <!-- end contents -->
-
-<!-- Page Wrapper -->
-@INCLUDE('front_end.layouts.footer')
-
-<!-- Page Wrapper -->
-@INCLUDE('front_end.layouts.js')
+@endsection
