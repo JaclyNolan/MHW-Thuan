@@ -16,6 +16,7 @@ use App\Http\Controllers\trackingController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -104,8 +105,10 @@ Route::group(['prefix' => 'FrontEnd'], function () {
     Route::get('/', [HomeController::class, "index"])->name('index');
     Route::get('shop/', [HomeController::class, "shop"])->name('shop');
     Route::get('shopdetails/{id}', [HomeController::class, "shopdetails"])->name('shopdetails');
+    Route::post('shopdetails/{id}', [HomeController::class, "postShopDetails"]);
     Route::get('cart/', [HomeController::class, "cart"])->name('cart');
-    Route::get('checkout/{id}', [HomeController::class, "checkout"])->name('checkout');
+    Route::get('checkout/id={id}&quantity={quantity}', [HomeController::class, "checkout"])->name('checkout');
+    Route::post('checkout/id={id}&quantity={quantity}', [HomeController::class, "postCheckout"]);
     Route::get('/cart}',[CartController::class, "Cart"])->name('cart');
     // Route::post('/edit/{id}',[AdminController::class, "postEdit"]);
     // Route::get('/delete/{id}',[AdminController::class, "destroy"]);
@@ -118,11 +121,18 @@ Route::group(['prefix' => 'FrontEnd'], function () {
             
         Route::get('add-to-cart/{id}',[CartController::class,'addtocart'])->name('addtocart');
 
+
         Route::post('/update-cart/{id}',[CartController::class,'updatecart'])->name('updatecart');
 
         Route::delete('deletecart/{id}',[CartController::class,'delete']);
             
     });
+
+Route::group(['prefix' => 'order'], function () {
+    Route::get('/', [OrderController::class, "getFind"]);
+    Route::post('/', [OrderController::class, "postFind"]);
+    Route::get('result', [OrderController::class, "result"]);
+});
 
 
 // Route::get('/getForm', function () {

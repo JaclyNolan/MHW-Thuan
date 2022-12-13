@@ -1,6 +1,6 @@
 <!-- Footer Section Begin -->
     <footer class="footer spad">
-        <div class="container">
+        <div class="container sticky-bottom">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">

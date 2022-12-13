@@ -38,8 +38,8 @@ class Laptop extends Model
     public function color() {
         return $this->belongsTo(Color::class, 'colorID');
     }
-    public function ssh() {
-        return $this->belongsTo(SSH::class, 'sshID');
+    public function ssd() {
+        return $this->belongsTo(SSD::class, 'ssdID');
     }
     public function provider() {
         return $this->belongsTo(Provider::class, 'providerID');

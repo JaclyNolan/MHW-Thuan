@@ -148,7 +148,7 @@ class ImageController extends Controller
                 $image->delete();
                 return back()->with('success', 'Image sucessfully deleted');
             } else {
-                return back()->with('success', 'Image unsucessfully deleted');
+                return back()->with('failure', 'Image unsucessfully deleted');
             }
         } else {
             $image->delete();
