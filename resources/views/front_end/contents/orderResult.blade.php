@@ -26,7 +26,8 @@
                                 <img style="max-width: 100px; max-height:100px; float: left;"
                                     src="{{ $array->laptop->images->first()->getImages() }}" alt="">
                                 <h5 style="float: left">
-                                    <ul class="mb-2" style="font-weight: 700; font-size: 18px;">{{ $array->laptop->name }}
+                                    <ul class="mb-2" style="font-weight: 700; font-size: 18px;"><a
+                                            href="shopdetails/{{ $array->laptop->id }}"> {{ $array->laptop->name }} </a>
                                     </ul>
                                     <ul style="font-weight: 400; font-size: 15px;">CPU:
                                         {{ $array->laptop->processor->name }}</ul>

@@ -59,6 +59,7 @@ class HomeController extends Controller
         $order->total = $order->old_price * $order->quanity;
 
         $order->save();
+        $laptop->save();
 
         return (redirect('order')->with('success', 'Order has been successfully placed'));
     }
