@@ -32,7 +32,7 @@ class ImageModel extends Model
 
     public function getImage() {
         if ($this->url == "") {
-            return asset('images/' . $this->name);
+            return asset('image/' . $this->name);
         }
         elseif ($this->name == "") {
             return $this->url;
