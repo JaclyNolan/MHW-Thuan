@@ -8,6 +8,11 @@
             <strong>{{ $message }}</strong>
         </div>
     @endif
+    @if ($message = Session::get('failure'))
+        <div class="alert alert-danger alert-block">
+            <strong>{{ $message }}</strong>
+        </div>
+    @endif
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary float-left">Image</h6>

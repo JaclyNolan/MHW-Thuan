@@ -7,6 +7,7 @@ use App\Http\Controllers\MyController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 
@@ -73,7 +74,23 @@ Route::group(['prefix'=>'/admin'],function(){
     Route::get('/login', [LoginController::class, 'login'])->name('admin.admin.index');
     Route::get('/register', [RegisterController::class, 'register']);
 });
-// Route::get('/demo', [MyController::class, "demo"]);
+
+Route::group(['prefix'=>'/admin/order'],function(){
+    Route::get('/',[OrderController::class, "index"])->name('admin.order.index');
+    Route::get('/create',[OrderController::class, "create"])->name('admin.order.create');
+    Route::post('/create',[OrderController::class, "store"]);
+    Route::get('/edit/{id}',[OrderController::class, "edit"])->name('admin.order.edit');
+    Route::post('/edit/{id}',[OrderController::class, "update"]);
+    Route::get('/delete/{id}',[OrderController::class, "destroy"]);
+});
+
+
+Route::get('/admin/user/show', function () {
+    return view('admin.user.show');
+});
+
+Route::get('',[WebController::class, "index"])->name("index");
+
 
 // Route::get('/getForm', function () {
 //     return view('postForm');
