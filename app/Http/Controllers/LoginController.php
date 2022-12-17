@@ -16,7 +16,7 @@ class LoginController extends Controller
         $arr = ['email' =>$request->email, 'aPassword'=>$request->password];
         if(Auth::attempt($arr))
         {
-            dd('Successful');
+            return redirect()->route('ListUser');
         }
         else{
             dd('Failed');
@@ -24,6 +24,6 @@ class LoginController extends Controller
     }
     public function getLogout(){
         Auth::logout();
-        return redirect()->route('admin.admin.index')->with('Successful', 'Successfully created');
+        return redirect()->intended('login');
     }
 }

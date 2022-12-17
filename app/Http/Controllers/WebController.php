@@ -12,22 +12,22 @@ class WebController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function blank(){
-        return view('font_end.layout.index');
+        return view('front_end.layout.index');
     }
 
     public function tracking() {
-        return view('font_end.tracking.tracking');
+        return view('front_end.tracking.tracking');
     }
 
     public function homepage(){
-        return view('font_end.homepage.homepage');
+        return view('front_end.homepage.homepage');
     }
     public function cart(){
-        return view('font_end.cart.cart');
+        return view('front_end.cart.cart');
     }
         public function index()
     {
         $layout = $this -> layout -> showAlllayout();
-        return view('font_end.layout.index', compact('layout'));
+        return view('front_end.layout.index', compact('layout'));
     }
 }

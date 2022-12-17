@@ -10,6 +10,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\SlideController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -56,11 +59,13 @@ Route::group(['prefix'=>'/admin/simple'],function(){
 });
 
 Route::group(['prefix'=>'/admin'],function(){
-    Route::get('/login', [LoginController::class, 'getLogin'])->name('admin.admin.login');
+    Route::get('/login', [LoginController::class, 'getLogin'])->name('loginmodel');
     Route::post('/login', [LoginController::class, 'postLogin']);
     Route::get('/register', [RegisterController::class, 'getRegister']);
     Route::post('/register', [RegisterController::class, 'postRegister']);
+    Route::get('/', [AdminController::class, 'getAllAdmin'])->name('listUser');
 });
+ 
 
 Route::group(['prefix'=>'/admin/image'],function(){
     Route::get('/',[ImageController::class, "index"])->name('admin.image.index');
@@ -70,9 +75,19 @@ Route::group(['prefix'=>'/admin/image'],function(){
     Route::post('/edit/{id}',[ImageController::class, "update"]);
     Route::get('/delete/{id}',[ImageController::class, "destroy"]);
 });
-Route::group(['prefix'=>'/admin'],function(){
-    Route::get('/login', [LoginController::class, 'login'])->name('admin.admin.index');
-    Route::get('/register', [RegisterController::class, 'register']);
+Route::group(['prefix' => '/admin/slide'], function () {
+
+    Route::get('/', [SlideController::class, 'index'])->name('admin.slide.index');
+
+    Route::get('create/', [SlideController::class, 'getCreate'])->name('admin.slide.create');
+    
+    Route::post('create/', [SlideController::class, 'postCreate']);
+
+    Route::get('edit/{id}', [SlideController::class, 'getEditCate']);
+
+    Route::post('edit/{id}', [SlideController::class, 'postEditCate']);
+
+    Route::get('delete/{id}', [SlideController::class, 'delete']);
 });
 
 Route::group(['prefix'=>'/admin/order'],function(){

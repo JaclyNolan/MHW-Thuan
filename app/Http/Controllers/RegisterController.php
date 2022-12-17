@@ -23,6 +23,6 @@ class RegisterController extends Controller
       $admins ->aPassword = Hash::make($request->password);
       $admins ->aPhonenumber = $request->phone_number;
       $admins ->save();
-      return redirect()->route('admin.admin.login')->with('Successful', 'Successfully created');
+      return redirect()->route('admin.login')->with('Successful', 'Successfully created');
     }
 }

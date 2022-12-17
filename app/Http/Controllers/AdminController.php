@@ -148,7 +148,7 @@ class AdminController extends Controller
           return redirect()->route('listAdmin')->with('message', 'Sucessful');
         }
         else{
-          return redirect()->route('getLogin')->with('message', 'Failed');
+          return redirect()->route('loginmodel  ')->with('message', 'Failed');
         }
     }
 }
